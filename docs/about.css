@@ -1,0 +1,38 @@
+#about {
+  width: 80%;
+  display: flex;
+  position: fixed;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+}
+
+
+#about img {
+  flex: 1;
+  height: 400px;
+  width: 200px;
+  margin-right: 2rem;
+}
+
+#about p {
+  flex: 1;
+  border-width: 0 0 0 1px;
+  border-style: solid;
+  border-color: #000;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+
+@media (max-width: 768px) {
+  #about {
+    flex-direction: column;
+  }
+
+  #about p {
+    border-width: 0;
+  }
+}
