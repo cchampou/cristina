@@ -9,9 +9,12 @@
 
 #socials {
   margin-top: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 #socials a {
   text-decoration: none;
+  display: block;
   margin: 1rem;
 }
