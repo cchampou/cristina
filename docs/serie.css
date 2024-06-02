@@ -1,0 +1,46 @@
+#current-photo {
+  display: flex;
+}
+
+#photo-frame {
+  flex: 1;
+  background-color: black;
+  height: 400px;
+  position: relative;
+}
+
+#photo-frame img {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#photo-info {
+  margin-left: 2rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#gallery .photo {
+  margin: 1rem;
+  flex: 1;
+  width: 300px;
+}
+
+#gallery .photo img {
+  max-width: 100%;
+}
+
+#gallery h3 {
+  margin: 0;
+}
