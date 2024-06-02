@@ -4,11 +4,15 @@ body {
 
 h1 {
   font-weight: 300;
-  margin: auto;
   text-align: center;
+  font-size: 3rem;
+}
+
+#center {
+  margin: auto;
   top: 50vh;
   transform: translateY(-50%);
-  position: fixed;
   width: 100%;
-  font-size: 3rem;
+  position: fixed;
+  text-align: center;
 }
