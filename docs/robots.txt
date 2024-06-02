@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /serie.html
+
+Sitemap: https://cristina-coellen.com/sitemap.xml
