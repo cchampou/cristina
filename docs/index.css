@@ -1,0 +1,17 @@
+#center {
+  margin: auto;
+  top: 50vh;
+  transform: translateY(-50%);
+  width: 100%;
+  position: fixed;
+  text-align: center;
+}
+
+#socials {
+  margin-top: 2rem;
+}
+
+#socials a {
+  text-decoration: none;
+  margin: 1rem;
+}

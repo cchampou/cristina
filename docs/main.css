@@ -7,17 +7,3 @@ h1 {
   text-align: center;
   font-size: 3rem;
 }
-
-#center {
-  margin: auto;
-  top: 50vh;
-  transform: translateY(-50%);
-  width: 100%;
-  position: fixed;
-  text-align: center;
-}
-
-#socials a {
-  text-decoration: none;
-  margin: 1rem;
-}
