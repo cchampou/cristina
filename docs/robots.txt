@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /serie.html
+Disallow: /portfolio/
 
 Sitemap: https://cristina-coellen.com/sitemap.xml
