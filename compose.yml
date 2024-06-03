@@ -27,3 +27,10 @@ services:
       API_TOKEN_SALT: b8gt5k98c
       PUBLIC_URL: https://strapi.cristina-coellen.com
       PROXY: true
+    volumes:
+      - ./config:/opt/app/config
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./yarn.lock:/opt/yarn.lock
+      - ./.env:/opt/app/.env
+      - ./public/uploads:/opt/app/public/uploads
