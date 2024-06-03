@@ -9,6 +9,7 @@ export interface DefaultPhoto extends Schema.Component {
   attributes: {
     caption: Attribute.Text;
     file: Attribute.Media<'images'> & Attribute.Required;
+    description: Attribute.Text;
   };
 }
 
