@@ -23,3 +23,4 @@ services:
       APP_KEYS: b8gt5k98c
       NODE_ENV: production
       API_TOKEN_SALT: b8gt5k98c
+      PUBLIC_URL: https://strapi.cristina-coellen.com
