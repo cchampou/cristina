@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import React, { useEffect, useState } from 'react';
-import { fetchSeries, StrapiResponse, Serie} from './requests';
+import { fetchSeries, StrapiResponse, Serie, Photo } from './requests';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -24,7 +24,9 @@ function App() {
         {series.map((serie) => (
           <section key={serie.id}>
             <h2>{serie.attributes.title}</h2>
-
+            {serie.attributes.photo.map((photo: Photo) => (
+              <img key={photo.id} src={photo.file.data.attributes.formats.small.url} alt={photo.caption} />
+            ))}
           </section>
         ))}
       </ul>
