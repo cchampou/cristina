@@ -362,35 +362,63 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiSerieSerie extends Schema.CollectionType {
-  collectionName: 'series';
+export interface ApiCollectionCollection extends Schema.CollectionType {
+  collectionName: 'collections';
   info: {
-    singularName: 'serie';
-    pluralName: 'series';
-    displayName: 'Serie';
+    singularName: 'collection';
+    pluralName: 'collections';
+    displayName: 'Collection';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    photo: Attribute.Component<'default.photo', true>;
+    summary: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    photos: Attribute.Component<'default.photo', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::serie.serie',
+      'api::collection.collection',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::serie.serie',
+      'api::collection.collection',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::collection.collection',
+      'oneToMany',
+      'api::collection.collection'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -830,7 +858,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::serie.serie': ApiSerieSerie;
+      'api::collection.collection': ApiCollectionCollection;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * serie controller
+ * collection controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::serie.serie');
+module.exports = createCoreController('api::collection.collection');

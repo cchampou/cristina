@@ -35,7 +35,7 @@ export type Collection = {
   id: number;
   attributes: {
     title: string;
-    photo: Photo[];
+    photos: Photo[];
   }
 }
 

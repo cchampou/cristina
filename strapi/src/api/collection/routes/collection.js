@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * serie router
+ * collection router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::serie.serie');
+module.exports = createCoreRouter('api::collection.collection');

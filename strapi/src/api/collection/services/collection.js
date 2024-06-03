@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * serie service
+ * collection service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::serie.serie');
+module.exports = createCoreService('api::collection.collection');
