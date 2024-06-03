@@ -1,0 +1,12 @@
+{
+  "name": "cristina",
+  "version": "0.0.0",
+  "repository": "git@github.com:cchampou/cristina.git",
+  "author": "cchampou <clement@champouillon.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vite": "^5.2.12"
+  }
+}
