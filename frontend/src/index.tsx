@@ -1,7 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import React, { useEffect, useState } from 'react';
-import { fetchSeries, StrapiResponse, Serie, Photo } from './requests';
+import { fetchSeries, Serie, Photo } from './requests';
 import { getUploadURL } from './utils/uploads';
+
+import "./global-styles.css";
 
 const root = createRoot(document.getElementById('root'));
 
