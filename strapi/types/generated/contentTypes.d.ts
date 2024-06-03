@@ -392,6 +392,38 @@ export interface ApiPhotoPhoto extends Schema.SingleType {
   };
 }
 
+export interface ApiSerieSerie extends Schema.CollectionType {
+  collectionName: 'series';
+  info: {
+    singularName: 'serie';
+    pluralName: 'series';
+    displayName: 'Serie';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    Photo: Attribute.Component<'default.photo', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::serie.serie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::serie.serie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -829,6 +861,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::photo.photo': ApiPhotoPhoto;
+      'api::serie.serie': ApiSerieSerie;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

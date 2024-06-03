@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_default_photos",
+  "info": {
+    "displayName": "Photo",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "caption": {
+      "type": "text"
+    },
+    "file": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}
