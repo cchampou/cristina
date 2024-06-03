@@ -24,3 +24,4 @@ services:
       NODE_ENV: production
       API_TOKEN_SALT: b8gt5k98c
       PUBLIC_URL: https://strapi.cristina-coellen.com
+      PROXY: true
