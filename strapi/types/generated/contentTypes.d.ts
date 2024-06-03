@@ -375,7 +375,7 @@ export interface ApiSerieSerie extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    Photo: Attribute.Component<'default.photo', true>;
+    photo: Attribute.Component<'default.photo', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

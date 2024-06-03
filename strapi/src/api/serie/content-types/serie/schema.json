@@ -16,7 +16,7 @@
       "type": "string",
       "required": true
     },
-    "Photo": {
+    "photo": {
       "type": "component",
       "repeatable": true,
       "component": "default.photo"

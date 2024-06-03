@@ -1,6 +1,7 @@
 export default {
   base: '/portfolio/',
   build: {
-    outDir: 'docs/portfolio',
+    outDir: '../docs/portfolio',
+    emptyOutDir: true,
   },
 }
