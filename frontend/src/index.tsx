@@ -1,40 +1,28 @@
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import React, { useEffect, useState } from 'react';
-import { fetchSeries, Serie, Photo } from './requests';
-import { getUploadURL } from './utils/uploads';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import "./global-styles.css";
+import './global-styles.css';
+import Homepage from './pages/Homepage';
 
-const root = createRoot(document.getElementById('root'));
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+  throw new Error('No root element found');
+}
+
+const root = createRoot(rootElement);
 
 function App() {
-  const [series, setSeries] = useState<Serie[]>([]);
-
-  useEffect(() => {
-    fetchSeries().then((response) => {
-      setSeries(response.data);
-    }).catch((error) => {
-      console.error(error);
-    });
-  }, []);
 
 
-  console.log(series);
   return (
-    <div>
-      <h1>Portfolio</h1>
-      <ul>
-        {series.map((serie) => (
-          <section key={serie.id}>
-            <h2>{serie.attributes.title}</h2>
-            {serie.attributes.photo.map((photo: Photo) => (
-              <img key={photo.id} src={getUploadURL(photo.file.data.attributes.formats.small.url)} alt={photo.caption} />
-            ))}
-          </section>
-        ))}
-      </ul>
-    </div>
+    <BrowserRouter basename="/portfolio">
+      <Routes>
+        <Route path="/" element={<Homepage/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-root.render(<App />);
+root.render(<App/>);

@@ -3,6 +3,8 @@
     "types": ["vite/client"],
     "module": "ESNext",
     "jsx": "react",
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "allowSyntheticDefaultImports": true
   }
 }
