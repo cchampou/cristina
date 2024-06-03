@@ -6,3 +6,27 @@ services:
     volumes:
       - ./docs:/usr/share/nginx/html
     restart: unless-stopped
+  strapiDB:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: strapi
+  strapi:
+    build: strapi
+    depends_on:
+      - strapiDB
+    ports:
+      - "1337:1337"
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: strapiDB
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      JWT_SECRET: b8gt5k98c
+      ADMIN_JWT_SECRET: b8gt5k98c
+      APP_KEYS: b8gt5k98c
+      NODE_ENV: production
+      API_TOKEN_SALT: b8gt5k98c
