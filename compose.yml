@@ -1,11 +1,4 @@
 services:
-  nginx:
-    image: nginx:latest
-    ports:
-      - "8080:80"
-    volumes:
-      - ./docs:/usr/share/nginx/html
-    restart: unless-stopped
   strapiDB:
     image: postgres:14
     environment:
