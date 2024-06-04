@@ -41,14 +41,6 @@ export type Collection = {
   }
 }
 
-export function fetchCollections(): Promise<StrapiResponse<Collection[]>> {
-  return fetch(import.meta.env.VITE_API_URL + '/collections?populate=photos.file', {
-    headers: {
-      Authorization: 'Bearer ' + import.meta.env.VITE_API_KEY,
-    }
-  }).then(response => response.json());
-}
-
 export class ApiService {
 
   private static apiUrl = import.meta.env.VITE_API_URL;
@@ -69,5 +61,9 @@ export class ApiService {
 
   public static fetchCollections(): Promise<StrapiResponse<Collection[]>> {
     return this.fetch('/collections?populate=photos.file');
+  }
+
+  public static fetchCollection(id: number): Promise<StrapiResponse<Collection>> {
+    return this.fetch(`/collections/${id}?populate=photos.file`);
   }
 }
