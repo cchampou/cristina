@@ -21,6 +21,10 @@ export type Photo = {
   id: number;
   caption: string;
   description: string;
+  date: string;
+  time: string;
+  camera: string;
+  location: string;
   file: {
     data: {
       id: number
