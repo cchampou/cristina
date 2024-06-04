@@ -25,6 +25,7 @@
   object-fit: contain;
   display: flex;
   width: 50vw;
+  max-height: 50vh;
   flex-shrink: 0;
   aspect-ratio: 3 / 2;
   margin-bottom: 2rem;
