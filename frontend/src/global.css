@@ -3,6 +3,7 @@ body {
   font-weight: 300;
   max-width: 1500px;
   margin: auto;
+  padding: 1rem;
 }
 
 h1 {
