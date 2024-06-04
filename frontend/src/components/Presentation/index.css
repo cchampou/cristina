@@ -21,11 +21,11 @@
 }
 
 .presentation-current-photo > img {
-  background-color: black;
+  background-color: white;
   object-fit: contain;
   display: flex;
   width: 50vw;
-  max-height: 50vh;
+  max-height: 60vh;
   flex-shrink: 0;
   aspect-ratio: 3 / 2;
   margin-bottom: 2rem;
