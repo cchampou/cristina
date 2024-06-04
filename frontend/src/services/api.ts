@@ -48,3 +48,26 @@ export function fetchCollections(): Promise<StrapiResponse<Collection[]>> {
     }
   }).then(response => response.json());
 }
+
+export class ApiService {
+
+  private static apiUrl = import.meta.env.VITE_API_URL;
+
+  private static buildHeaders() {
+    return {
+      Authorization: 'Bearer ' + import.meta.env.VITE_API_KEY,
+    }
+  }
+
+  private static async fetch<T>(pathname: string, options: RequestInit = {}): Promise<T> {
+    const response = await fetch(this.apiUrl + pathname, {
+      headers: this.buildHeaders(),
+      ...options
+    });
+    return response.json();
+  }
+
+  public static fetchCollections(): Promise<StrapiResponse<Collection[]>> {
+    return this.fetch('/collections?populate=photos.file');
+  }
+}
