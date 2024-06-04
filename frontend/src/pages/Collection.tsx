@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import type { Collection } from '../services/api';
 import { ApiService } from '../services/api';
-import { getUploadURL } from '../utils/uploads';
 import PhotoGallery from '../components/PhotoGallery';
+import Presentation from '../components/Presentation';
 
 type CollectionParams = {
   id: string;
@@ -32,26 +32,10 @@ function Collection() {
     });
   }, [id]);
 
-  const currentPhoto = useMemo(() => collection?.attributes.photos[selectedPhotoIndex],
-    [collection, selectedPhotoIndex]);
-  const currentPhotoUrl = useMemo(() => currentPhoto ?
-      getUploadURL(currentPhoto.file.data.attributes.formats.large.url) : undefined,
-    [currentPhoto]);
-  const currentPhotoCaption = useMemo(
-    () => currentPhoto ? currentPhoto.caption : undefined
-    , [currentPhoto]);
-  const currentPhotoDescription = useMemo(
-    () => currentPhoto ? currentPhoto.description : undefined
-    , [currentPhoto]);
+  if (!collection) return null;
 
   return (<>
-      <section>
-        <h1>{collection?.attributes.title}</h1>
-        <p>{collection?.attributes.summary}</p>
-        <img src={currentPhotoUrl} alt={currentPhotoCaption}/>
-        <p>{currentPhotoCaption}</p>
-        <p>{currentPhotoDescription}</p>
-      </section>
+      <Presentation collection={collection} selectedPhotoIndex={selectedPhotoIndex} />
       <PhotoGallery photos={collection?.attributes.photos || []} onPhotoSelect={setSelectedPhotoIndex} />
     </>
   );

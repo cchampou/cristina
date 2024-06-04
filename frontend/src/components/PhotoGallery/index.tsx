@@ -14,10 +14,11 @@ function PhotoGallery({ photos, onPhotoSelect }: PhotoGalleryProps) {
   return (
     <nav>
       {photos.map((photo, index) => (
-        <button key={photo.id} onClick={() => onPhotoSelect(index)}>
+        <button key={photo.id} onClick={() => onPhotoSelect(index)} className="photo-gallery-button">
           <img
             src={getUploadURL(photo.file.data.attributes.formats.small.url)}
             alt={photo.file.data.attributes.name}
+            className="photo-gallery-image"
           />
         </button>
       ))}
