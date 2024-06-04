@@ -1,4 +1,4 @@
-import React, { ComponentProps, ComponentPropsWithoutRef, MouseEventHandler } from 'react';
+import React, { MouseEventHandler } from 'react';
 
 import { Collection } from '../../services/api';
 import { getUploadURL } from '../../utils/uploads';
