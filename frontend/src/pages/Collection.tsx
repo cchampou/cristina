@@ -32,11 +32,16 @@ function Collection() {
     });
   }, [id]);
 
+  const onPhotoSelect = (photoIndex: number) => {
+    setSelectedPhotoIndex(photoIndex);
+    window.scrollTo(0, 0);
+  }
+
   if (!collection) return null;
 
   return (<>
       <Presentation collection={collection} selectedPhotoIndex={selectedPhotoIndex} />
-      <PhotoGallery photos={collection?.attributes.photos || []} onPhotoSelect={setSelectedPhotoIndex} />
+      <PhotoGallery photos={collection?.attributes.photos || []} onPhotoSelect={onPhotoSelect} />
     </>
   );
 }
