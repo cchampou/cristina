@@ -19,7 +19,6 @@ export type Formatkey = 'large' | 'small' | 'medium' | 'thumbnail';
 
 export type Photo = {
   id: number;
-  caption: string;
   description: string;
   date: string;
   time: string;

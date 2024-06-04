@@ -20,10 +20,6 @@ function Presentation({ collection, selectedPhotoIndex }: PresentationProps) {
       getUploadURL(currentPhoto.file.data.attributes.formats.large.url) : undefined,
     [currentPhoto]);
 
-  const currentPhotoCaption = useMemo(
-    () => currentPhoto ? currentPhoto.caption : undefined
-    , [currentPhoto]);
-
   const currentPhotoDescription = useMemo(
     () => currentPhoto ? currentPhoto.description : undefined
     , [currentPhoto]);
@@ -45,14 +41,15 @@ function Presentation({ collection, selectedPhotoIndex }: PresentationProps) {
       <h1>{collection?.attributes.title}</h1>
       <p>{collection?.attributes.summary}</p>
       <div className="presentation-current-photo">
-        <img src={currentPhotoUrl} alt={currentPhotoCaption}/>
+        <img src={currentPhotoUrl} alt={currentPhotoDescription}/>
         <div>
-          <h2>{currentPhotoCaption}</h2>
+          <p>{currentPhotoDescription}</p>
           <hr />
-            <span className="presentation-location">{currentPhotoLocation}</span>
-            {currentPhotoCamera ? <span className="presentation-camera">, {currentPhotoCamera}</span> : null}
-            {currentPhotoDate ? <span className="presentation-date">, {currentPhotoDate}</span> : null}
-            <p>{currentPhotoDescription}</p>
+          <ul>
+            <li><strong>Lieu:</strong> {currentPhotoLocation}</li>
+            <li><strong>Appareil photo:</strong> {currentPhotoCamera}</li>
+            <li><strong>Date:</strong> {currentPhotoDate}</li>
+          </ul>
         </div>
       </div>
     </section>
