@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, {useMemo, useRef} from 'react';
 
 import type { Collection } from '../../services/api';
 import { getUploadURL } from '../../utils/uploads';
@@ -11,6 +11,12 @@ type PresentationProps = {
 };
 
 function Presentation({ collection, selectedPhotoIndex }: PresentationProps) {
+  const presentationImageRef = useRef<HTMLImageElement>(null);
+
+  const requestFullScreen = () => {
+    if (!presentationImageRef.current) return;
+    presentationImageRef.current.requestFullscreen();
+  }
 
   const currentPhoto = useMemo(() => collection?.attributes.photos[selectedPhotoIndex],
     [collection, selectedPhotoIndex]);
@@ -41,7 +47,7 @@ function Presentation({ collection, selectedPhotoIndex }: PresentationProps) {
       <h1>{collection?.attributes.title}</h1>
       <p>{collection?.attributes.summary}</p>
       <div className="presentation-current-photo">
-        <img src={currentPhotoUrl} alt={currentPhotoDescription}/>
+        <img ref={presentationImageRef} src={currentPhotoUrl} alt={currentPhotoDescription} onClick={requestFullScreen} />
         <div>
           <p>{currentPhotoDescription}</p>
           <hr />
