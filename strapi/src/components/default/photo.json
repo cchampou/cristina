@@ -6,9 +6,6 @@
   },
   "options": {},
   "attributes": {
-    "caption": {
-      "type": "text"
-    },
     "file": {
       "type": "media",
       "multiple": false,
