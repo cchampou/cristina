@@ -19,12 +19,13 @@ function Homepage() {
   return (
     <>
       <h1>Portfolio</h1>
-      <ul>
-        {collections.map((collection) => (
-          <CollectionCard collection={collection} key={collection.id}
-                          onClick={() => navigate(`/collection/${collection.id}`)}/>
-        ))}
-      </ul>
+      {collections.map((collection) => (
+        <CollectionCard
+          collection={collection}
+          key={collection.id}
+          onClick={() => navigate(`/collection/${collection.id}`)}
+        />
+      ))}
     </>
   );
 }

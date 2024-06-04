@@ -28,3 +28,22 @@
 .collection-section .collection-info h2 {
   margin: 0;
 }
+
+@media screen and (max-width: 500px) {
+  .collection-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .collection-section .collection-info {
+    padding: 1rem 0;
+  }
+
+  .collection-section .collection-info h2 {
+    text-align: center;
+  }
+
+  .collection-section .collection-info p {
+    display: none;
+  }
+}
