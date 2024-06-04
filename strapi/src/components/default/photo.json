@@ -19,6 +19,18 @@
     },
     "description": {
       "type": "text"
+    },
+    "date": {
+      "type": "date"
+    },
+    "time": {
+      "type": "time"
+    },
+    "camera": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
     }
   }
 }
