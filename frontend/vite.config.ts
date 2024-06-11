@@ -1,7 +1,5 @@
+import react from '@vitejs/plugin-react';
+
 export default {
-  base: '/portfolio/',
-  build: {
-    outDir: '../docs/portfolio',
-    emptyOutDir: true,
-  },
+  plugins: [react()],
 }
