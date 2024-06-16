@@ -76,7 +76,7 @@ function NotFound() {
   return /* @__PURE__ */ jsx("h1", { children: "404 - Not Found" });
 }
 function Homepage() {
-  return /* @__PURE__ */ jsxs("div", { id: "center", children: [
+  return /* @__PURE__ */ jsx("div", { id: "center", children: /* @__PURE__ */ jsxs("div", { children: [
     /* @__PURE__ */ jsx("h1", { children: "Cristina Coellen" }),
     /* @__PURE__ */ jsx(Link, { to: "/about", children: "À propos" }),
     /* @__PURE__ */ jsxs("div", { id: "socials", children: [
@@ -112,7 +112,7 @@ function Homepage() {
         "Instagram"
       ] })
     ] })
-  ] });
+  ] }) });
 }
 function PhotoGallery({ photos, onPhotoSelect }) {
   return /* @__PURE__ */ jsx("nav", { children: photos.map((photo, index) => /* @__PURE__ */ jsx("button", { onClick: () => onPhotoSelect(index), className: "photo-gallery-button", children: /* @__PURE__ */ jsx(

@@ -2,8 +2,13 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   max-width: 1500px;
-  margin: auto;
+  margin: 0;
+  height: calc(100vh - 2rem);
   padding: 1rem;
+}
+
+#app {
+  height: 100%;
 }
 
 h1 {

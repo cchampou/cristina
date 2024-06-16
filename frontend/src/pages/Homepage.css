@@ -1,9 +1,10 @@
 #center {
   margin: auto;
-  top: 50vh;
-  transform: translateY(-50%);
   width: 100%;
-  position: fixed;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
