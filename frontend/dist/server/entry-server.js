@@ -5,9 +5,11 @@ var __publicField = (obj, key, value) => {
   return value;
 };
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import ReactDOMServer from "react-dom/server";
+import { useLenis, ReactLenis } from "lenis/react";
 import { useNavigate, Link, useParams, Routes, Route } from "react-router-dom";
+import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import { StaticRouter } from "react-router-dom/server.mjs";
 function getUploadURL(path) {
   const baseURL = "https://strapi.cristina-coellen.com/api";
@@ -50,7 +52,16 @@ class ApiService {
   }
 }
 __publicField(ApiService, "apiUrl", "https://strapi.cristina-coellen.com/api");
+function ScrollDown() {
+  return /* @__PURE__ */ jsxs("div", { className: "scroll-down", children: [
+    /* @__PURE__ */ jsx("span", { className: "scroll-text", children: "Scroll to explore" }),
+    /* @__PURE__ */ jsx("div", { className: "caret" }),
+    /* @__PURE__ */ jsx("div", { className: "caret" }),
+    /* @__PURE__ */ jsx("div", { className: "caret" })
+  ] });
+}
 function Portfolio() {
+  const background = useRef(null);
   const [collections, setCollections] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -61,7 +72,11 @@ function Portfolio() {
     });
   }, []);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx("h1", { children: "Portfolio" }),
+    /* @__PURE__ */ jsxs("div", { id: "portfolio-jumbotron", ref: background, children: [
+      /* @__PURE__ */ jsx(Parallax, { speed: -5, targetElement: background.current ?? void 0, children: /* @__PURE__ */ jsx("h1", { children: "Portfolio" }) }),
+      /* @__PURE__ */ jsx(Parallax, { speed: 2, targetElement: background.current ?? void 0, children: /* @__PURE__ */ jsx("h2", { children: "Cristina Coellen" }) }),
+      /* @__PURE__ */ jsx(ScrollDown, {})
+    ] }),
     collections.map((collection) => /* @__PURE__ */ jsx(
       CollectionCard,
       {
@@ -250,14 +265,16 @@ const routes = {
   }
 };
 function App() {
-  return /* @__PURE__ */ jsxs(Routes, { children: [
+  useLenis(() => {
+  });
+  return /* @__PURE__ */ jsx(ReactLenis, { root: true, children: /* @__PURE__ */ jsx(ParallaxProvider, { children: /* @__PURE__ */ jsxs(Routes, { children: [
     /* @__PURE__ */ jsx(Route, { path: routes.homepage.path, element: /* @__PURE__ */ jsx(Homepage, {}) }),
     /* @__PURE__ */ jsx(Route, { path: routes.portfolio.path, element: /* @__PURE__ */ jsx(Portfolio, {}) }),
     /* @__PURE__ */ jsx(Route, { path: routes.about.path, element: /* @__PURE__ */ jsx(About, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "/portfolio/collection/:id", element: /* @__PURE__ */ jsx(Collection, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "/not-found", element: /* @__PURE__ */ jsx(NotFound, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })
-  ] });
+  ] }) }) });
 }
 function render(url) {
   const html = ReactDOMServer.renderToString(

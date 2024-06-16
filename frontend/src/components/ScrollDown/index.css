@@ -1,0 +1,54 @@
+.scroll-text {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.caret {
+  width: 8px;
+  height: 8px;
+  border-style: solid;
+  border-color: white;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg) translateX(-50%);
+  left: 50%;
+  top: 1rem;
+  position: relative;
+  animation: blink-with-ease 3s infinite;
+}
+
+.scroll-down .caret:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.scroll-down .caret:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.scroll-down .caret:nth-child(3) {
+  animation-delay: 2s;
+}
+
+
+@keyframes blink-with-ease {
+  0% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

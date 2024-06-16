@@ -1,0 +1,44 @@
+#portfolio-jumbotron {
+  background-image: url('/bg.jpg');
+  filter: grayscale(100%);
+  width: 100%;
+  height: 100dvh;
+  background-size: cover;
+  position: relative;
+  top: 0;
+  left: 0;
+  font-family: "Playfair Display", serif;
+}
+
+#portfolio-jumbotron h1 {
+  top: 50dvh;
+  left: 4rem;
+  position: relative;
+  display: inline-block;
+  color: white;
+  text-align: left;
+  font-size: 5rem;
+  margin: 0;
+  font-weight: bolder;
+}
+
+#portfolio-jumbotron h2 {
+  position: relative;
+  font-weight: lighter;
+  display: inline-block;
+  top: 50dvh;
+  left: 14rem;
+  color: white;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  #portfolio-jumbotron h1 {
+    font-size: 3rem;
+  }
+
+  #portfolio-jumbotron h2 {
+    font-size: 1.1rem;
+    left: 50dvw;
+  }
+}
