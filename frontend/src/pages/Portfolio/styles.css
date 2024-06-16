@@ -11,8 +11,8 @@
 }
 
 #portfolio-jumbotron h1 {
-  top: 50dvh;
-  left: 4rem;
+  top: 50px;
+  left: 100px;
   position: relative;
   display: inline-block;
   color: white;
@@ -26,8 +26,8 @@
   position: relative;
   font-weight: lighter;
   display: inline-block;
-  top: 50dvh;
-  left: 14rem;
+  top: 50px;
+  left: 100px;
   color: white;
   margin: 0;
 }
@@ -39,6 +39,5 @@
 
   #portfolio-jumbotron h2 {
     font-size: 1.1rem;
-    left: 50dvw;
   }
 }

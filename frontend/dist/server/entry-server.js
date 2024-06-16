@@ -72,8 +72,8 @@ function Portfolio() {
   }, []);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsxs("div", { id: "portfolio-jumbotron", ref: background, children: [
-      /* @__PURE__ */ jsx(Parallax, { speed: -5, targetElement: background.current ?? void 0, children: /* @__PURE__ */ jsx("h1", { children: "Portfolio" }) }),
-      /* @__PURE__ */ jsx(Parallax, { speed: 2, targetElement: background.current ?? void 0, children: /* @__PURE__ */ jsx("h2", { children: "Cristina Coellen" }) }),
+      /* @__PURE__ */ jsx(Parallax, { translateX: [5, -5], targetElement: background.current ?? void 0, children: /* @__PURE__ */ jsx("h1", { children: "Portfolio" }) }),
+      /* @__PURE__ */ jsx(Parallax, { translateX: [-5, 5], targetElement: background.current ?? void 0, children: /* @__PURE__ */ jsx("h2", { children: "Cristina Coellen" }) }),
       /* @__PURE__ */ jsx(ScrollDown, {})
     ] }),
     collections.map((collection) => /* @__PURE__ */ jsx(

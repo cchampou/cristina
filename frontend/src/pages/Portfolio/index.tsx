@@ -24,10 +24,10 @@ function Portfolio() {
   return (
     <>
       <div id="portfolio-jumbotron" ref={background}>
-        <Parallax speed={-5} targetElement={background.current ?? undefined}>
+        <Parallax translateX={[5, -5]} targetElement={background.current ?? undefined}>
           <h1>Portfolio</h1>
         </Parallax>
-        <Parallax speed={2} targetElement={background.current ?? undefined}>
+        <Parallax translateX={[-5, 5]} targetElement={background.current ?? undefined}>
           <h2>Cristina Coellen</h2>
         </Parallax>
         <ScrollDown />
