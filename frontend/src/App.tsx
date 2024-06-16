@@ -1,5 +1,4 @@
 import React from 'react';
-import {ReactLenis, useLenis} from "lenis/react";
 
 import {Route, Routes} from 'react-router-dom';
 import Portfolio from './pages/Portfolio';
@@ -15,12 +14,7 @@ import {ParallaxProvider} from "react-scroll-parallax";
 
 function App() {
 
-  // useLenis(() => {
-  //
-  // });
-
   return (
-    // <ReactLenis root>
       <ParallaxProvider>
         <Routes>
           <Route path={routes.homepage.path} element={<Homepage/>}/>
@@ -31,7 +25,6 @@ function App() {
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </ParallaxProvider>
-    // </ReactLenis>
   );
 }
 
