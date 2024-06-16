@@ -7,7 +7,6 @@ var __publicField = (obj, key, value) => {
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import React, { useRef, useState, useEffect, useMemo } from "react";
 import ReactDOMServer from "react-dom/server";
-import { useLenis, ReactLenis } from "lenis/react";
 import { useNavigate, Link, useParams, Routes, Route } from "react-router-dom";
 import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import { StaticRouter } from "react-router-dom/server.mjs";
@@ -265,16 +264,17 @@ const routes = {
   }
 };
 function App() {
-  useLenis(() => {
-  });
-  return /* @__PURE__ */ jsx(ReactLenis, { root: true, children: /* @__PURE__ */ jsx(ParallaxProvider, { children: /* @__PURE__ */ jsxs(Routes, { children: [
-    /* @__PURE__ */ jsx(Route, { path: routes.homepage.path, element: /* @__PURE__ */ jsx(Homepage, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: routes.portfolio.path, element: /* @__PURE__ */ jsx(Portfolio, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: routes.about.path, element: /* @__PURE__ */ jsx(About, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: "/portfolio/collection/:id", element: /* @__PURE__ */ jsx(Collection, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: "/not-found", element: /* @__PURE__ */ jsx(NotFound, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })
-  ] }) }) });
+  return (
+    // <ReactLenis root>
+    /* @__PURE__ */ jsx(ParallaxProvider, { children: /* @__PURE__ */ jsxs(Routes, { children: [
+      /* @__PURE__ */ jsx(Route, { path: routes.homepage.path, element: /* @__PURE__ */ jsx(Homepage, {}) }),
+      /* @__PURE__ */ jsx(Route, { path: routes.portfolio.path, element: /* @__PURE__ */ jsx(Portfolio, {}) }),
+      /* @__PURE__ */ jsx(Route, { path: routes.about.path, element: /* @__PURE__ */ jsx(About, {}) }),
+      /* @__PURE__ */ jsx(Route, { path: "/portfolio/collection/:id", element: /* @__PURE__ */ jsx(Collection, {}) }),
+      /* @__PURE__ */ jsx(Route, { path: "/not-found", element: /* @__PURE__ */ jsx(NotFound, {}) }),
+      /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })
+    ] }) })
+  );
 }
 function render(url) {
   const html = ReactDOMServer.renderToString(

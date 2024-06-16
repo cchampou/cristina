@@ -15,12 +15,12 @@ import {ParallaxProvider} from "react-scroll-parallax";
 
 function App() {
 
-  useLenis(() => {
-
-  });
+  // useLenis(() => {
+  //
+  // });
 
   return (
-    <ReactLenis root>
+    // <ReactLenis root>
       <ParallaxProvider>
         <Routes>
           <Route path={routes.homepage.path} element={<Homepage/>}/>
@@ -31,7 +31,7 @@ function App() {
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </ParallaxProvider>
-    </ReactLenis>
+    // </ReactLenis>
   );
 }
 
