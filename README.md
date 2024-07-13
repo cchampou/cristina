@@ -1,9 +1,22 @@
 # Development instructions
 
-Have your Docker up and running and run the following command:
+To be updated...
+
+# Deployment instructions
+
+To deploy the application, connect to the server using the root user,
+then use the `cchampou` user.
 
 ```bash
-docker-compose up
+su cchampou
 ```
 
-This will start the development server and you can access it at [http://localhost:80](http://localhost:80).
+Then, go to the project directory and pull the latest changes from the
+repository.
+
+```bash
+cd /home/cchampou/cristina
+git pull
+```
+
+Finally, restart the application using docker compose.
