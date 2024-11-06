@@ -1,9 +1,11 @@
+import "react-image-gallery/styles/css/image-gallery.css";
 import React from 'react';
+import ImageGallery from 'react-image-gallery';
 
 import { Photo } from '../../services/api';
 import { getUploadURL } from '../../utils/uploads';
 
-import  './index.css';
+import './index.css';
 
 type PhotoGalleryProps = {
   photos: Array<Photo>;
@@ -11,18 +13,18 @@ type PhotoGalleryProps = {
 }
 
 function PhotoGallery({ photos, onPhotoSelect }: PhotoGalleryProps) {
+
+  const images = photos.map(photo => ({
+    original: getUploadURL(photo.file.data.attributes.formats.small.url),
+    thumbnail: getUploadURL(photo.file.data.attributes.formats.thumbnail.url),
+    originalHeight: 400,
+    thumbnailHeight: 100,
+  }));
+
   return (
-    <nav>
-      {photos.map((photo, index) => (
-        <button key={photo.id} onClick={() => onPhotoSelect(index)} className="photo-gallery-button">
-          <img
-            src={getUploadURL(photo.file.data.attributes.formats.small.url)}
-            alt={photo.file.data.attributes.name}
-            className="photo-gallery-image"
-          />
-        </button>
-      ))}
-    </nav>
+    <div style={{ backgroundColor: 'black' }}>
+      <ImageGallery items={images} showThumbnails showNav/>
+    </div>
   );
 }
 

@@ -46,19 +46,19 @@ function Presentation({collection, selectedPhotoIndex}: PresentationProps) {
         <section className="presentation-section">
             <h1>{collection?.attributes.title}</h1>
             <p id="presentation-summary">{collection?.attributes.summary}</p>
-            <div className="presentation-current-photo">
-                <img ref={presentationImageRef} src={currentPhotoUrl} alt={currentPhotoDescription}
-                     onClick={requestFullScreen} title="Cliquez pour agrandir" style={{cursor: "pointer"}}/>
-                <div>
-                    <p>{currentPhotoDescription}</p>
-                    <hr/>
-                    <ul>
-                        <li><strong>Lieu:</strong> {currentPhotoLocation}</li>
-                        <li><strong>Appareil photo:</strong> {currentPhotoCamera}</li>
-                        <li><strong>Date:</strong> {currentPhotoDate}</li>
-                    </ul>
-                </div>
-            </div>
+            {/*<div className="presentation-current-photo">*/}
+            {/*    <img ref={presentationImageRef} src={currentPhotoUrl} alt={currentPhotoDescription}*/}
+            {/*         onClick={requestFullScreen} title="Cliquez pour agrandir" style={{cursor: "pointer"}}/>*/}
+            {/*    <div>*/}
+            {/*        <p>{currentPhotoDescription}</p>*/}
+            {/*        <hr/>*/}
+            {/*        <ul>*/}
+            {/*            <li><strong>Lieu:</strong> {currentPhotoLocation}</li>*/}
+            {/*            <li><strong>Appareil photo:</strong> {currentPhotoCamera}</li>*/}
+            {/*            <li><strong>Date:</strong> {currentPhotoDate}</li>*/}
+            {/*        </ul>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </section>
     );
 }
