@@ -45,7 +45,7 @@ function Presentation({collection, selectedPhotoIndex}: PresentationProps) {
     return (
         <section className="presentation-section">
             <h1>{collection?.attributes.title}</h1>
-            <p>{collection?.attributes.summary}</p>
+            <p id="presentation-summary">{collection?.attributes.summary}</p>
             <div className="presentation-current-photo">
                 <img ref={presentationImageRef} src={currentPhotoUrl} alt={currentPhotoDescription}
                      onClick={requestFullScreen} title="Cliquez pour agrandir" style={{cursor: "pointer"}}/>
