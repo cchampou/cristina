@@ -38,7 +38,7 @@ function CollectionCard({ collection, onClick, onLoaded }: CollectionCardProps) 
       <img
         ref={imageRef}
         src={getUploadURL(collection.photos[0].file.formats.small.url)}
-        alt={collection.photos[0].caption}
+        alt={collection.photos[0].description}
       />
     </div>
     <div className="collection-info">

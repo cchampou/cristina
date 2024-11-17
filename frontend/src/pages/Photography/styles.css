@@ -1,6 +1,6 @@
 #collection-carousel {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     transition: height 500ms;
     height: 0;
     overflow-y: auto;
