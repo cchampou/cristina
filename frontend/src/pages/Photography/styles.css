@@ -1,0 +1,7 @@
+#collection-carousel {
+    display: flex;
+    justify-content: center;
+    transition: height 500ms;
+    height: 0;
+    overflow-y: hidden;
+}

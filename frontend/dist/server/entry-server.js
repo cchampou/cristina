@@ -7,8 +7,9 @@ var __publicField = (obj, key, value) => {
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import React, { useRef, useState, useEffect, useMemo } from "react";
 import ReactDOMServer from "react-dom/server";
-import { useNavigate, Link, useParams, Routes, Route } from "react-router-dom";
+import { useNavigate, NavLink, Link, useParams, Routes, Route } from "react-router-dom";
 import { Parallax, ParallaxProvider } from "react-scroll-parallax";
+import ImageGallery from "react-image-gallery";
 import { StaticRouter } from "react-router-dom/server.mjs";
 function getUploadURL(path) {
   const baseURL = "https://strapi.cristina-coellen.com/api";
@@ -89,10 +90,134 @@ function Portfolio() {
 function NotFound() {
   return /* @__PURE__ */ jsx("h1", { children: "404 - Not Found" });
 }
+const routes = {
+  homepage: {
+    title: "Cristina Coellen",
+    description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
+    path: "/"
+  },
+  about: {
+    title: "A propos",
+    description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
+    path: "/about"
+  },
+  portfolio: {
+    title: "Portfolio",
+    description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
+    path: "/portfolio"
+  },
+  contact: {
+    title: "Contact",
+    description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
+    path: "/contact"
+  }
+};
+function Header({ immersive }) {
+  return /* @__PURE__ */ jsxs("nav", { id: "header", style: {
+    position: immersive ? "absolute" : "relative",
+    color: immersive ? "white" : "black",
+    textShadow: immersive ? "0 2px 4px gray" : "none"
+  }, children: [
+    /* @__PURE__ */ jsx(NavLink, { to: routes.homepage.path, children: "Home" }),
+    /* @__PURE__ */ jsx(NavLink, { to: routes.about.path, children: "About" }),
+    /* @__PURE__ */ jsx(NavLink, { to: routes.portfolio.path, children: "Portfolio" }),
+    /* @__PURE__ */ jsx(NavLink, { to: routes.contact.path, children: "Contact" })
+  ] });
+}
+function Footer() {
+  return /* @__PURE__ */ jsxs("footer", { children: [
+    /* @__PURE__ */ jsx("p", { children: "Copyright © Cristina Coellen 2024" }),
+    /* @__PURE__ */ jsx(Link, { to: "#", children: "Legal" }),
+    /* @__PURE__ */ jsx(Link, { to: "#", children: "Privacy policy" })
+  ] });
+}
+function PageLayout({ children, immersive }) {
+  return /* @__PURE__ */ jsxs("div", { id: "layout", children: [
+    /* @__PURE__ */ jsx(Header, { immersive }),
+    /* @__PURE__ */ jsx("main", { children }),
+    /* @__PURE__ */ jsx(Footer, {})
+  ] });
+}
+function Title({ children }) {
+  return /* @__PURE__ */ jsx("h1", { children });
+}
 function Homepage() {
-  return /* @__PURE__ */ jsx("div", { id: "center", children: /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx("h1", { children: "Cristina Coellen" }),
-    /* @__PURE__ */ jsx(Link, { to: "/about", children: "À propos" }),
+  return /* @__PURE__ */ jsx(PageLayout, { immersive: true, children: /* @__PURE__ */ jsx("div", { id: "jumbo", children: /* @__PURE__ */ jsx(Title, { children: "Cristina Coellen" }) }) });
+}
+function PhotoGallery({ photos, onPhotoSelect }) {
+  const images = photos.map((photo) => ({
+    original: getUploadURL(photo.file.data.attributes.formats.small.url),
+    thumbnail: getUploadURL(photo.file.data.attributes.formats.thumbnail.url),
+    originalHeight: 400,
+    thumbnailHeight: 100
+  }));
+  return /* @__PURE__ */ jsx("div", { style: { backgroundColor: "black" }, children: /* @__PURE__ */ jsx(ImageGallery, { items: images, showThumbnails: true, showNav: true }) });
+}
+function Presentation({ collection, selectedPhotoIndex }) {
+  useRef(null);
+  const currentPhoto = useMemo(
+    () => collection == null ? void 0 : collection.attributes.photos[selectedPhotoIndex],
+    [collection, selectedPhotoIndex]
+  );
+  console.log(currentPhoto);
+  useMemo(
+    () => currentPhoto ? getUploadURL(currentPhoto.file.data.attributes.formats.large.url) : void 0,
+    [currentPhoto]
+  );
+  useMemo(
+    () => currentPhoto ? currentPhoto.description : void 0,
+    [currentPhoto]
+  );
+  useMemo(
+    () => currentPhoto ? currentPhoto.location : void 0,
+    [currentPhoto]
+  );
+  useMemo(
+    () => currentPhoto ? currentPhoto.camera : void 0,
+    [currentPhoto]
+  );
+  useMemo(
+    () => currentPhoto ? currentPhoto.date : void 0,
+    [currentPhoto]
+  );
+  return /* @__PURE__ */ jsxs("section", { className: "presentation-section", children: [
+    /* @__PURE__ */ jsx("h1", { children: collection == null ? void 0 : collection.attributes.title }),
+    /* @__PURE__ */ jsx("p", { id: "presentation-summary", children: collection == null ? void 0 : collection.attributes.summary })
+  ] });
+}
+function Collection() {
+  const { id } = useParams();
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
+  const [collection, setCollection] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!id) {
+      console.error("Invalid collection id");
+      navigate("/not-found", {
+        replace: true
+      });
+      return;
+    }
+    ApiService.fetchCollection(parseInt(id, 10)).then((response) => {
+      setCollection(response.data);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }, [id]);
+  const onPhotoSelect = (photoIndex) => {
+    setSelectedPhotoIndex(photoIndex);
+    window.scrollTo(0, 0);
+  };
+  if (!collection)
+    return null;
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx(Presentation, { collection, selectedPhotoIndex }),
+    /* @__PURE__ */ jsx(PhotoGallery, { photos: (collection == null ? void 0 : collection.attributes.photos) || [], onPhotoSelect })
+  ] });
+}
+function Contact() {
+  return /* @__PURE__ */ jsxs(PageLayout, { children: [
+    /* @__PURE__ */ jsx(Title, { children: "Contact" }),
     /* @__PURE__ */ jsxs("div", { id: "socials", children: [
       /* @__PURE__ */ jsxs("a", { href: "https://www.linkedin.com/in/cristina-c-7357bb18a/", target: "_blank", children: [
         /* @__PURE__ */ jsx("svg", { xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", width: "48", height: "48", viewBox: "0 0 50 50", children: /* @__PURE__ */ jsx(
@@ -126,148 +251,55 @@ function Homepage() {
         "Instagram"
       ] })
     ] })
-  ] }) });
-}
-function PhotoGallery({ photos, onPhotoSelect }) {
-  return /* @__PURE__ */ jsx("nav", { children: photos.map((photo, index) => /* @__PURE__ */ jsx("button", { onClick: () => onPhotoSelect(index), className: "photo-gallery-button", children: /* @__PURE__ */ jsx(
-    "img",
-    {
-      src: getUploadURL(photo.file.data.attributes.formats.small.url),
-      alt: photo.file.data.attributes.name,
-      className: "photo-gallery-image"
-    }
-  ) }, photo.id)) });
-}
-function Presentation({ collection, selectedPhotoIndex }) {
-  const presentationImageRef = useRef(null);
-  const requestFullScreen = () => {
-    if (!presentationImageRef.current)
-      return;
-    presentationImageRef.current.requestFullscreen();
-  };
-  const currentPhoto = useMemo(
-    () => collection == null ? void 0 : collection.attributes.photos[selectedPhotoIndex],
-    [collection, selectedPhotoIndex]
-  );
-  console.log(currentPhoto);
-  const currentPhotoUrl = useMemo(
-    () => currentPhoto ? getUploadURL(currentPhoto.file.data.attributes.formats.large.url) : void 0,
-    [currentPhoto]
-  );
-  const currentPhotoDescription = useMemo(
-    () => currentPhoto ? currentPhoto.description : void 0,
-    [currentPhoto]
-  );
-  const currentPhotoLocation = useMemo(
-    () => currentPhoto ? currentPhoto.location : void 0,
-    [currentPhoto]
-  );
-  const currentPhotoCamera = useMemo(
-    () => currentPhoto ? currentPhoto.camera : void 0,
-    [currentPhoto]
-  );
-  const currentPhotoDate = useMemo(
-    () => currentPhoto ? currentPhoto.date : void 0,
-    [currentPhoto]
-  );
-  return /* @__PURE__ */ jsxs("section", { className: "presentation-section", children: [
-    /* @__PURE__ */ jsx("h1", { children: collection == null ? void 0 : collection.attributes.title }),
-    /* @__PURE__ */ jsx("p", { children: collection == null ? void 0 : collection.attributes.summary }),
-    /* @__PURE__ */ jsxs("div", { className: "presentation-current-photo", children: [
-      /* @__PURE__ */ jsx(
-        "img",
-        {
-          ref: presentationImageRef,
-          src: currentPhotoUrl,
-          alt: currentPhotoDescription,
-          onClick: requestFullScreen,
-          title: "Cliquez pour agrandir",
-          style: { cursor: "pointer" }
-        }
-      ),
-      /* @__PURE__ */ jsxs("div", { children: [
-        /* @__PURE__ */ jsx("p", { children: currentPhotoDescription }),
-        /* @__PURE__ */ jsx("hr", {}),
-        /* @__PURE__ */ jsxs("ul", { children: [
-          /* @__PURE__ */ jsxs("li", { children: [
-            /* @__PURE__ */ jsx("strong", { children: "Lieu:" }),
-            " ",
-            currentPhotoLocation
-          ] }),
-          /* @__PURE__ */ jsxs("li", { children: [
-            /* @__PURE__ */ jsx("strong", { children: "Appareil photo:" }),
-            " ",
-            currentPhotoCamera
-          ] }),
-          /* @__PURE__ */ jsxs("li", { children: [
-            /* @__PURE__ */ jsx("strong", { children: "Date:" }),
-            " ",
-            currentPhotoDate
-          ] })
-        ] })
-      ] })
-    ] })
-  ] });
-}
-function Collection() {
-  const { id } = useParams();
-  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
-  const [collection, setCollection] = useState(null);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!id) {
-      console.error("Invalid collection id");
-      navigate("/not-found", {
-        replace: true
-      });
-      return;
-    }
-    ApiService.fetchCollection(parseInt(id, 10)).then((response) => {
-      setCollection(response.data);
-    }).catch((error) => {
-      console.error(error);
-    });
-  }, [id]);
-  const onPhotoSelect = (photoIndex) => {
-    setSelectedPhotoIndex(photoIndex);
-    window.scrollTo(0, 0);
-  };
-  if (!collection)
-    return null;
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx(Presentation, { collection, selectedPhotoIndex }),
-    /* @__PURE__ */ jsx(PhotoGallery, { photos: (collection == null ? void 0 : collection.attributes.photos) || [], onPhotoSelect })
   ] });
 }
 const portrait = "/assets/portrait-BmivbdbN.jpg";
 function About() {
-  return /* @__PURE__ */ jsxs("section", { id: "about", children: [
-    /* @__PURE__ */ jsx("img", { src: portrait, alt: "portrait" }),
-    /* @__PURE__ */ jsx("p", { children: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens." })
+  return /* @__PURE__ */ jsxs(PageLayout, { children: [
+    /* @__PURE__ */ jsx(Title, { children: "About" }),
+    /* @__PURE__ */ jsxs("section", { id: "about", children: [
+      /* @__PURE__ */ jsx("img", { src: portrait, alt: "portrait" }),
+      /* @__PURE__ */ jsxs("p", { children: [
+        "Originally from Austria, Cristina Coellen is a multimedia journalist with a lot of love for all things video. She has graduated from ",
+        /* @__PURE__ */ jsx("strong", { children: "Durham University (UK)" }),
+        " with an undergraduate degree in French and History and from ",
+        /* @__PURE__ */ jsx("strong", { children: "Sciences Po Paris" }),
+        " with a Master’s in Journalism and International Security.",
+        /* @__PURE__ */ jsx("br", {}),
+        /* @__PURE__ */ jsx("br", {}),
+        "During her journalistic training, she notably worked for the German newspaper ",
+        /* @__PURE__ */ jsx("strong", { children: "Frankfurter Allgemeine Zeitung" }),
+        ", the video department of the French magazine ",
+        /* @__PURE__ */ jsx("strong", { children: "Le Nouvel Obs" }),
+        " and the evening news show of Franco-German TV channel ",
+        /* @__PURE__ */ jsx("strong", { children: "ARTE" }),
+        ".",
+        /* @__PURE__ */ jsx("br", {}),
+        /* @__PURE__ */ jsx("br", {}),
+        "She has also freelanced for a variety of media, among which ",
+        /* @__PURE__ */ jsx("strong", { children: "Slate" }),
+        ", ",
+        /* @__PURE__ */ jsx("strong", { children: "New Eastern Europe Magazine" }),
+        ", ",
+        /* @__PURE__ */ jsx("strong", { children: "Vorarlberger Nachrichten" }),
+        " and ",
+        /* @__PURE__ */ jsx("strong", { children: "Are We Europe" }),
+        ".",
+        /* @__PURE__ */ jsx("br", {}),
+        /* @__PURE__ */ jsx("br", {}),
+        "She is currently working at ",
+        /* @__PURE__ */ jsx("strong", { children: "Euronews" }),
+        " as a digital video producer."
+      ] })
+    ] })
   ] });
 }
-const routes = {
-  homepage: {
-    title: "Cristina Coellen",
-    description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
-    path: "/"
-  },
-  about: {
-    title: "A propos",
-    description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
-    path: "/about"
-  },
-  portfolio: {
-    title: "Portfolio",
-    description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
-    path: "/portfolio"
-  }
-};
 function App() {
   return /* @__PURE__ */ jsx(ParallaxProvider, { children: /* @__PURE__ */ jsxs(Routes, { children: [
     /* @__PURE__ */ jsx(Route, { path: routes.homepage.path, element: /* @__PURE__ */ jsx(Homepage, {}) }),
     /* @__PURE__ */ jsx(Route, { path: routes.portfolio.path, element: /* @__PURE__ */ jsx(Portfolio, {}) }),
     /* @__PURE__ */ jsx(Route, { path: routes.about.path, element: /* @__PURE__ */ jsx(About, {}) }),
+    /* @__PURE__ */ jsx(Route, { path: routes.contact.path, element: /* @__PURE__ */ jsx(Contact, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "/portfolio/collection/:id", element: /* @__PURE__ */ jsx(Collection, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "/not-found", element: /* @__PURE__ */ jsx(NotFound, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })

@@ -15,7 +15,7 @@ export type Format = {
   sizeInBytes: number;
 }
 
-export type Formatkey = 'large' | 'small' | 'medium' | 'thumbnail';
+export type FormatKey = 'large' | 'small' | 'medium' | 'thumbnail';
 
 export type Photo = {
   id: number;
@@ -29,7 +29,7 @@ export type Photo = {
       id: number
       attributes: {
         name: string;
-        formats: Record<Formatkey, Format>
+        formats: Record<FormatKey, Format>
       }
     }
   }
@@ -38,10 +38,22 @@ export type Photo = {
 export type Collection = {
   id: number;
   attributes: {
+    location?: string | null;
+    date: string;
     title: string;
     summary: string;
     photos: Photo[];
   }
+}
+
+export enum ReferenceType {
+  'video'= 'video',
+  'print' = 'print',
+}
+
+export type Reference = {
+  link: string;
+  type: ReferenceType
 }
 
 export class ApiService {

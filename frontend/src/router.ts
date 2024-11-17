@@ -4,7 +4,7 @@ type Route = {
   description: string
 }
 
-type RouteName = string;
+type RouteName = 'homepage' | 'photography' | 'contact' | 'journalism';
 
 const routes: Record<RouteName, Route> = {
   homepage: {
@@ -12,16 +12,21 @@ const routes: Record<RouteName, Route> = {
     description: 'D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.',
     path: '/'
   },
-  about: {
-    title: 'A propos',
+  photography: {
+    title: 'Photography',
     description: 'D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.',
-    path: '/about'
+    path: '/photography'
   },
-  portfolio: {
-    title: 'Portfolio',
+  journalism: {
+    title: 'Journalism',
     description: 'D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.',
-    path: '/portfolio'
-  }
+    path: '/journalism'
+  },
+  contact: {
+    title: 'Contact',
+    description: 'D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.',
+    path: '/contact'
+  },
 }
 
 export function findRouteByPath(path: string): Route | undefined {
