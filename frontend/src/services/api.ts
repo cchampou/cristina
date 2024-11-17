@@ -25,29 +25,24 @@ export type Photo = {
   camera: string;
   location: string;
   file: {
-    data: {
-      id: number
-      attributes: {
-        name: string;
-        formats: Record<FormatKey, Format>
-      }
-    }
+    id: number
+    name: string;
+    formats: Record<FormatKey, Format>
   }
 }
 
 export type Collection = {
   id: number;
-  attributes: {
-    location?: string | null;
-    date: string;
-    title: string;
-    summary: string;
-    photos: Photo[];
-  }
+  documentId: string;
+  location?: string | null;
+  date: string;
+  title: string;
+  summary: string;
+  photos: Photo[];
 }
 
 export enum ReferenceType {
-  'video'= 'video',
+  'video' = 'video',
   'print' = 'print',
 }
 
@@ -78,7 +73,7 @@ export class ApiService {
     return this.fetch('/collections?populate=photos.file');
   }
 
-  public static fetchCollection(id: number): Promise<StrapiResponse<Collection>> {
-    return this.fetch(`/collections/${id}?populate=photos.file`);
+  public static fetchCollection(documentId: string): Promise<StrapiResponse<Collection>> {
+    return this.fetch(`/collections/${documentId}?populate=photos.file`);
   }
 }

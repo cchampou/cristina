@@ -1,24 +1,24 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface DefaultPhoto extends Schema.Component {
+export interface DefaultPhoto extends Struct.ComponentSchema {
   collectionName: 'components_default_photos';
   info: {
-    displayName: 'Photo';
     description: '';
+    displayName: 'Photo';
   };
   attributes: {
-    file: Attribute.Media<'images'> & Attribute.Required;
-    description: Attribute.Text;
-    date: Attribute.Date;
-    time: Attribute.Time;
-    camera: Attribute.String;
-    location: Attribute.String;
+    camera: Schema.Attribute.String;
+    date: Schema.Attribute.Date;
+    description: Schema.Attribute.Text;
+    file: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    location: Schema.Attribute.String;
+    time: Schema.Attribute.Time;
   };
 }
 
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
       'default.photo': DefaultPhoto;
     }
   }

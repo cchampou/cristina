@@ -11,8 +11,8 @@ type PresentationProps = {
 function Presentation({collection}: PresentationProps) {
     return (
         <section className="presentation-section">
-            <h1>{collection?.attributes.title}</h1>
-            <p id="presentation-summary">{collection?.attributes.summary}</p>
+            <h1>{collection?.title}</h1>
+            <p id="presentation-summary">{collection?.summary}</p>
         </section>
     );
 }

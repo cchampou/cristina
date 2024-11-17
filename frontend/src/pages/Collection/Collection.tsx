@@ -13,7 +13,6 @@ type CollectionParams = {
 
 function Collection() {
   const { id } = useParams<CollectionParams>();
-  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number>(0);
   const [collection, setCollection] = useState<Collection | null>(null);
   const navigate = useNavigate();
 
@@ -26,23 +25,18 @@ function Collection() {
       return;
     }
 
-    ApiService.fetchCollection(parseInt(id, 10)).then((response) => {
+    ApiService.fetchCollection(id).then((response) => {
       setCollection(response.data);
     }).catch((error) => {
       console.error(error);
     });
   }, [id]);
 
-  const onPhotoSelect = (photoIndex: number) => {
-    setSelectedPhotoIndex(photoIndex);
-    window.scrollTo(0, 0);
-  }
-
   if (!collection) return null;
 
   return (<PageLayout>
-      <Presentation collection={collection} selectedPhotoIndex={selectedPhotoIndex} />
-      <PhotoGallery photos={collection?.attributes.photos || []} onPhotoSelect={onPhotoSelect} />
+      <Presentation collection={collection} />
+      <PhotoGallery photos={collection?.photos || []} />
     </PageLayout>
   );
 }

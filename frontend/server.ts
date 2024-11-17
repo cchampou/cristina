@@ -86,7 +86,7 @@ async function createDevServer() {
     }
   })
 
-  app.listen(5173)
+  app.listen(3000)
 }
 
 if (!isProduction) {

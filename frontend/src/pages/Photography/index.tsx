@@ -31,7 +31,7 @@ function Photography() {
           <CollectionCard
             collection={collection}
             key={collection.id}
-            onClick={() => navigate(`/portfolio/collection/${collection.id}`)}
+            onClick={() => navigate(`/portfolio/collection/${collection.documentId}`)}
             onLoaded={() => {
               setNbCollectionLoaded((prev) => prev + 1);
             }}

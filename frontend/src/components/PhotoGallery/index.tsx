@@ -9,14 +9,13 @@ import './index.css';
 
 type PhotoGalleryProps = {
   photos: Array<Photo>;
-  onPhotoSelect: (photoIndex: number) => void;
 }
 
-function PhotoGallery({ photos, onPhotoSelect }: PhotoGalleryProps) {
+function PhotoGallery({ photos }: PhotoGalleryProps) {
 
   const images = photos.map(photo => ({
-    original: getUploadURL(photo.file.data.attributes.formats.small.url),
-    thumbnail: getUploadURL(photo.file.data.attributes.formats.thumbnail.url),
+    original: getUploadURL(photo.file.formats.small.url),
+    thumbnail: getUploadURL(photo.file.formats.thumbnail.url),
     originalHeight: 400,
     thumbnailHeight: 100,
   }));
