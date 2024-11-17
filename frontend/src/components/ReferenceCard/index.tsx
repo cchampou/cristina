@@ -9,11 +9,14 @@ type Props = {
 
 function ReferenceCard({ link, title, media, date }: Props) {
   return (
-    <a href={link} target="_blank">
-      {title},&nbsp;
-      {media},&nbsp;
-      {date}
-    </a>
+    <>
+      <a href={link} target="_blank">
+        {title},&nbsp;
+        {media},&nbsp;
+        {date}
+      </a>
+      <br/>
+    </>
   );
 }
 
