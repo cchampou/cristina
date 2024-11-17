@@ -12,9 +12,9 @@ function ReferenceCard({ link, title, media, date }: Props) {
     <>
       <a href={link} target="_blank">
         {title},&nbsp;
-        <strong>{media}</strong>,&nbsp;
-        {date}
       </a>
+      <strong>{media}</strong>,&nbsp;
+      {date}
       <br/>
     </>
   );
