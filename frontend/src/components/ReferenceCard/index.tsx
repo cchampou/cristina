@@ -11,8 +11,9 @@ function ReferenceCard({ link, title, media, date }: Props) {
   return (
     <>
       <a href={link} target="_blank">
-        {title},&nbsp;
+        {title}
       </a>
+      ,&nbsp;
       <strong>{media}</strong>,&nbsp;
       {date}
       <br/>
