@@ -25,7 +25,7 @@ function Photography() {
     <PageLayout>
       <Title>Photography</Title>
       <div id="collection-carousel" style={{
-        height: collections.length > 0 && nbCollectionLoaded === collections.length ? 'calc(200px + 1rem)' : '0',
+        height: collections.length > 0 && nbCollectionLoaded === collections.length ? '200px' : '0',
       }}>
         {collections.map((collection) => (
           <CollectionCard

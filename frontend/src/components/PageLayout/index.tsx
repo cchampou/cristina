@@ -12,7 +12,7 @@ function PageLayout({ children, immersive }: Props) {
   return (
     <div id="layout">
       <Header immersive={immersive}/>
-      <main style={{ width: immersive ? '100%' : '80%' }}>
+      <main data-immersive={!!immersive}>
         {children}
       </main>
       <Footer/>

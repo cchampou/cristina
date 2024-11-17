@@ -1,7 +1,19 @@
 #collection-carousel {
     display: flex;
-    justify-content: flex-start;
     transition: height 500ms;
-    height: 0;
-    overflow-y: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+}
+
+/* make a :after with a white gradient to indicate the list is horizontally scrollable */
+
+#collection-carousel::after {
+    content: " ";
+    position: relative;
+    top: 0;
+    right: 20px;
+    bottom: 0;
+    width: 25px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
 }
