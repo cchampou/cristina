@@ -14,7 +14,7 @@ type PhotoGalleryProps = {
 function PhotoGallery({ photos }: PhotoGalleryProps) {
 
   const images = photos.map(photo => ({
-    original: getUploadURL(photo.file.formats.small.url),
+    original: getUploadURL(photo.file.formats.large.url),
     thumbnail: getUploadURL(photo.file.formats.thumbnail.url),
     originalHeight: 400,
     thumbnailHeight: 100,
