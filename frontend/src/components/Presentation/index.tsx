@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import type {Collection} from '../../services/api';
 
@@ -9,8 +9,15 @@ type PresentationProps = {
 };
 
 function Presentation({collection}: PresentationProps) {
-    return (
-        <section className="presentation-section">
+
+  useEffect(() => {
+    setTimeout(() => {
+      document.getElementById('anchor')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }, []);
+
+  return (
+        <section id="anchor" className="presentation-section">
             <h1>{collection?.title}</h1>
             <p id="presentation-summary">{collection?.summary}</p>
         </section>

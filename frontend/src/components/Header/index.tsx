@@ -27,11 +27,13 @@ function Header({ immersive }: Props) {
     observer.observe(document.body);
   }, []);
 
+  const backgroundColor = immersive || !isOpen ? 'transparent' : 'white';
+
   return <nav id="header" style={{
     position: immersive ? 'absolute' : 'relative',
     color: immersive ? 'white' : 'black',
     textShadow: immersive ? '0 2px 4px gray' : 'none',
-    backgroundColor: immersive ? 'transparent': 'white',
+    backgroundColor: backgroundColor,
   }}>
     <button onClick={() => setIsOpen(prev => !prev)} style={{ color: immersive ? 'white' : 'black' }}>=</button>
     {isOpen && (<><NavLink to={routes.homepage.path}>Home</NavLink>
