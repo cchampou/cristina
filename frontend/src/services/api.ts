@@ -48,6 +48,10 @@ export enum ReferenceType {
 
 export type Reference = {
   link: string;
+  title: string;
+  media: string;
+  date: string;
+  documentId: string;
   type: ReferenceType
 }
 
@@ -75,5 +79,13 @@ export class ApiService {
 
   public static fetchCollection(documentId: string): Promise<StrapiResponse<Collection>> {
     return this.fetch(`/collections/${documentId}?populate=photos.file`);
+  }
+
+  public static fetchReferences(): Promise<StrapiResponse<Reference[]>> {
+    return this.fetch('/references');
+  }
+
+  public static fetchReference(id: string): Promise<StrapiResponse<Reference>> {
+    return this.fetch(`/references/${id}`);
   }
 }

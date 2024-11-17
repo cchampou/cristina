@@ -2,11 +2,18 @@ import React from 'react';
 
 type Props = {
   link?: string;
+  title: string;
+  media: string;
+  date: string;
 }
 
-function ReferenceCard({ link }: Props) {
+function ReferenceCard({ link, title, media, date }: Props) {
   return (
-    <p>title, media name, date{link && <>: <a href={link}>Check it out</a></>}</p>
+    <a href={link} target="_blank">
+      {title},&nbsp;
+      {media},&nbsp;
+      {date}
+    </a>
   );
 }
 

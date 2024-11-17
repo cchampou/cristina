@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "references",
+  "info": {
+    "singularName": "reference",
+    "pluralName": "references",
+    "displayName": "Reference",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "media": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "video",
+        "print"
+      ],
+      "required": true,
+      "default": "print"
+    }
+  }
+}
