@@ -86,6 +86,6 @@ export class ApiService {
   }
 
   public static fetchReference(id: string): Promise<StrapiResponse<Reference>> {
-    return this.fetch(`/references/${id}`);
+    return this.fetch(`/references/${id}?sort=date:desc`);
   }
 }
