@@ -5,36 +5,65 @@ var __publicField = (obj, key, value) => {
   return value;
 };
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import React, { useRef, useState, useEffect, useMemo } from "react";
+import React, { memo, useEffect, useState, createElement } from "react";
 import ReactDOMServer from "react-dom/server";
-import { useNavigate, NavLink, Link, useParams, Routes, Route } from "react-router-dom";
-import { Parallax, ParallaxProvider } from "react-scroll-parallax";
+import { NavLink, Link, useNavigate, useParams, Routes, Route } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
+import { ParallaxProvider } from "react-scroll-parallax";
 import { StaticRouter } from "react-router-dom/server.mjs";
 function getUploadURL(path) {
-  const baseURL = "https://strapi.cristina-coellen.com/api";
+  const baseURL = "http://localhost:1337/api";
   const URLWithoutAPISuffix = baseURL.replace("/api", "");
   return URLWithoutAPISuffix + path;
 }
-function CollectionCard({ collection, onClick }) {
+function CollectionCard({ collection, onClick, onLoaded }) {
+  const imageRef = React.useRef(null);
+  const date = collection.date ? new Date(collection.date).toLocaleDateString() : "";
+  const loadHandler = () => {
+    onLoaded && onLoaded();
+  };
+  useEffect(() => {
+    const localImageRef = imageRef.current;
+    if (imageRef.current) {
+      localImageRef == null ? void 0 : localImageRef.addEventListener("load", loadHandler);
+    }
+    return () => {
+      if (imageRef.current) {
+        localImageRef == null ? void 0 : localImageRef.removeEventListener("load", loadHandler);
+      }
+    };
+  }, []);
   return /* @__PURE__ */ jsxs("section", { className: "collection-section", onClick, children: [
     /* @__PURE__ */ jsx("div", { className: "collection-image", children: /* @__PURE__ */ jsx(
       "img",
       {
-        src: getUploadURL(collection.attributes.photos[0].file.data.attributes.formats.small.url),
-        alt: collection.attributes.photos[0].caption
+        ref: imageRef,
+        src: getUploadURL(collection.photos[0].file.formats.small.url),
+        alt: collection.photos[0].caption
       }
     ) }),
     /* @__PURE__ */ jsxs("div", { className: "collection-info", children: [
-      /* @__PURE__ */ jsx("h2", { children: collection.attributes.title }),
-      /* @__PURE__ */ jsx("p", { children: collection.attributes.summary })
+      /* @__PURE__ */ jsx("h2", { children: collection.title }),
+      /* @__PURE__ */ jsxs("h3", { children: [
+        collection.location,
+        " ",
+        date
+      ] })
     ] })
   ] });
 }
+const CollectionCard$1 = memo(CollectionCard, (prevProps, nextProps) => {
+  return prevProps.collection.id === nextProps.collection.id;
+});
+var ReferenceType = /* @__PURE__ */ ((ReferenceType2) => {
+  ReferenceType2["video"] = "video";
+  ReferenceType2["print"] = "print";
+  return ReferenceType2;
+})(ReferenceType || {});
 class ApiService {
   static buildHeaders() {
     return {
-      Authorization: "Bearer 0dbf5445d3bf723965d9c1bcc1bb1f1ac179b95612fd308a1eb1a51d12fc868aa620139aa7a8ff022f66bbff6e98b2ffb4e360f5a5e48d24a2c960baa774f247acf1564b735a3e95c98b8d7d922828d7bcaf48ca3808049dcf8ba0a913d76ec32707b310b339444467ff6902404d9c337a8fa523a93593884563b40ce15affda"
+      Authorization: "Bearer f4a9503b8cfabfd22a9cb7c41767508dbbd609014900aa8808e43d27d7fa21898f59016d37958da03043ac7587b2494505c68950b9b63db5bd5f53f6346b5cdae34087c378d0221f6bb5b168ee5eddda60b7ab60aac6bb2f13e38270a0b1461720ace1da78fbf7fc2f13b1cbc80d3f497ca639e36fca716b181d92fae3741c12"
     };
   }
   static async fetch(pathname, options = {}) {
@@ -47,64 +76,32 @@ class ApiService {
   static fetchCollections() {
     return this.fetch("/collections?populate=photos.file");
   }
-  static fetchCollection(id) {
-    return this.fetch(`/collections/${id}?populate=photos.file`);
+  static fetchCollection(documentId) {
+    return this.fetch(`/collections/${documentId}?populate=photos.file`);
+  }
+  static fetchReferences() {
+    return this.fetch("/references");
+  }
+  static fetchReference(id) {
+    return this.fetch(`/references/${id}`);
   }
 }
-__publicField(ApiService, "apiUrl", "https://strapi.cristina-coellen.com/api");
-function ScrollDown() {
-  return /* @__PURE__ */ jsxs("div", { className: "scroll-down", children: [
-    /* @__PURE__ */ jsx("span", { className: "scroll-text", children: "Scroll to explore" }),
-    /* @__PURE__ */ jsx("div", { className: "caret" }),
-    /* @__PURE__ */ jsx("div", { className: "caret" }),
-    /* @__PURE__ */ jsx("div", { className: "caret" })
-  ] });
-}
-function Portfolio() {
-  const background = useRef(null);
-  const [collections, setCollections] = useState([]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    ApiService.fetchCollections().then((response) => {
-      setCollections(response.data);
-    }).catch((error) => {
-      console.error(error);
-    });
-  }, []);
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsxs("div", { id: "portfolio-jumbotron", ref: background, children: [
-      /* @__PURE__ */ jsx(Parallax, { translateX: [5, -5], targetElement: background.current ?? void 0, children: /* @__PURE__ */ jsx("h1", { children: "Portfolio" }) }),
-      /* @__PURE__ */ jsx(Parallax, { translateX: [-5, 5], targetElement: background.current ?? void 0, children: /* @__PURE__ */ jsx("h2", { children: "Cristina Coellen" }) }),
-      /* @__PURE__ */ jsx(ScrollDown, {})
-    ] }),
-    collections.map((collection) => /* @__PURE__ */ jsx(
-      CollectionCard,
-      {
-        collection,
-        onClick: () => navigate(`/portfolio/collection/${collection.id}`)
-      },
-      collection.id
-    ))
-  ] });
-}
-function NotFound() {
-  return /* @__PURE__ */ jsx("h1", { children: "404 - Not Found" });
-}
+__publicField(ApiService, "apiUrl", "http://localhost:1337/api");
 const routes = {
   homepage: {
     title: "Cristina Coellen",
     description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
     path: "/"
   },
-  about: {
-    title: "A propos",
+  photography: {
+    title: "Photography",
     description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
-    path: "/about"
+    path: "/photography"
   },
-  portfolio: {
-    title: "Portfolio",
+  journalism: {
+    title: "Journalism",
     description: "D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.",
-    path: "/portfolio"
+    path: "/journalism"
   },
   contact: {
     title: "Contact",
@@ -113,15 +110,34 @@ const routes = {
   }
 };
 function Header({ immersive }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleResize = () => {
+    if (window.innerWidth > 768) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  };
+  useEffect(() => {
+    handleResize();
+    const observer = new ResizeObserver(() => {
+      handleResize();
+    });
+    observer.observe(document.body);
+  }, []);
   return /* @__PURE__ */ jsxs("nav", { id: "header", style: {
     position: immersive ? "absolute" : "relative",
     color: immersive ? "white" : "black",
-    textShadow: immersive ? "0 2px 4px gray" : "none"
+    textShadow: immersive ? "0 2px 4px gray" : "none",
+    backgroundColor: immersive ? "transparent" : "white"
   }, children: [
-    /* @__PURE__ */ jsx(NavLink, { to: routes.homepage.path, children: "Home" }),
-    /* @__PURE__ */ jsx(NavLink, { to: routes.about.path, children: "About" }),
-    /* @__PURE__ */ jsx(NavLink, { to: routes.portfolio.path, children: "Portfolio" }),
-    /* @__PURE__ */ jsx(NavLink, { to: routes.contact.path, children: "Contact" })
+    /* @__PURE__ */ jsx("button", { onClick: () => setIsOpen((prev) => !prev), style: { color: immersive ? "white" : "black" }, children: "=" }),
+    isOpen && /* @__PURE__ */ jsxs(Fragment, { children: [
+      /* @__PURE__ */ jsx(NavLink, { to: routes.homepage.path, children: "Home" }),
+      /* @__PURE__ */ jsx(NavLink, { to: routes.photography.path, children: "Photography" }),
+      /* @__PURE__ */ jsx(NavLink, { to: routes.journalism.path, children: "Journalism" }),
+      /* @__PURE__ */ jsx(NavLink, { to: routes.contact.path, children: "Contact" })
+    ] })
   ] });
 }
 function Footer() {
@@ -134,60 +150,106 @@ function Footer() {
 function PageLayout({ children, immersive }) {
   return /* @__PURE__ */ jsxs("div", { id: "layout", children: [
     /* @__PURE__ */ jsx(Header, { immersive }),
-    /* @__PURE__ */ jsx("main", { children }),
+    /* @__PURE__ */ jsx("main", { style: { width: immersive ? "100%" : "80%" }, children }),
     /* @__PURE__ */ jsx(Footer, {})
   ] });
 }
 function Title({ children }) {
   return /* @__PURE__ */ jsx("h1", { children });
 }
-function Homepage() {
-  return /* @__PURE__ */ jsx(PageLayout, { immersive: true, children: /* @__PURE__ */ jsx("div", { id: "jumbo", children: /* @__PURE__ */ jsx(Title, { children: "Cristina Coellen" }) }) });
+function Photography() {
+  const [collections, setCollections] = useState([]);
+  const navigate = useNavigate();
+  const [nbCollectionLoaded, setNbCollectionLoaded] = useState(0);
+  useEffect(() => {
+    ApiService.fetchCollections().then((response) => {
+      setCollections(response.data);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }, []);
+  return /* @__PURE__ */ jsxs(PageLayout, { children: [
+    /* @__PURE__ */ jsx(Title, { children: "Photography" }),
+    /* @__PURE__ */ jsx("div", { id: "collection-carousel", style: {
+      height: collections.length > 0 && nbCollectionLoaded === collections.length ? "calc(200px + 1rem)" : "0"
+    }, children: collections.map((collection) => /* @__PURE__ */ jsx(
+      CollectionCard$1,
+      {
+        collection,
+        onClick: () => navigate(`/portfolio/collection/${collection.documentId}`),
+        onLoaded: () => {
+          setNbCollectionLoaded((prev) => prev + 1);
+        }
+      },
+      collection.id
+    )) })
+  ] });
 }
-function PhotoGallery({ photos, onPhotoSelect }) {
+function NotFound() {
+  return /* @__PURE__ */ jsx("h1", { children: "404 - Not Found" });
+}
+const portrait = "/assets/portrait-BmivbdbN.jpg";
+function Homepage() {
+  return /* @__PURE__ */ jsxs(PageLayout, { immersive: true, children: [
+    /* @__PURE__ */ jsx("div", { id: "jumbo", children: /* @__PURE__ */ jsx(Title, { children: "Cristina Coellen" }) }),
+    /* @__PURE__ */ jsxs("nav", { id: "CTA", children: [
+      /* @__PURE__ */ jsx(NavLink, { to: routes.journalism.path, children: "Journalism" }),
+      /* @__PURE__ */ jsx(NavLink, { to: routes.photography.path, children: "Photography" })
+    ] }),
+    /* @__PURE__ */ jsxs("section", { id: "about", children: [
+      /* @__PURE__ */ jsx("img", { src: portrait, alt: "portrait" }),
+      /* @__PURE__ */ jsxs("p", { children: [
+        "Originally from Austria, Cristina Coellen is a multimedia journalist with a lot of love for all things video. She has graduated from ",
+        /* @__PURE__ */ jsx("strong", { children: "Durham University (UK)" }),
+        " with an undergraduate degree in French and History and from ",
+        /* @__PURE__ */ jsx("strong", { children: "Sciences Po Paris" }),
+        " with a Master’s in Journalism and International Security.",
+        /* @__PURE__ */ jsx("br", {}),
+        /* @__PURE__ */ jsx("br", {}),
+        "During her journalistic training, she notably worked for the German newspaper ",
+        /* @__PURE__ */ jsx("strong", { children: "Frankfurter Allgemeine Zeitung" }),
+        ", the video department of the French magazine ",
+        /* @__PURE__ */ jsx("strong", { children: "Le Nouvel Obs" }),
+        " and the evening news show of Franco-German TV channel ",
+        /* @__PURE__ */ jsx("strong", { children: "ARTE" }),
+        ".",
+        /* @__PURE__ */ jsx("br", {}),
+        /* @__PURE__ */ jsx("br", {}),
+        "She has also freelanced for a variety of media, among which ",
+        /* @__PURE__ */ jsx("strong", { children: "Slate" }),
+        ", ",
+        /* @__PURE__ */ jsx("strong", { children: "New Eastern Europe Magazine" }),
+        ", ",
+        /* @__PURE__ */ jsx("strong", { children: "Vorarlberger Nachrichten" }),
+        " and ",
+        /* @__PURE__ */ jsx("strong", { children: "Are We Europe" }),
+        ".",
+        /* @__PURE__ */ jsx("br", {}),
+        /* @__PURE__ */ jsx("br", {}),
+        "She is currently working at ",
+        /* @__PURE__ */ jsx("strong", { children: "Euronews" }),
+        " as a digital video producer."
+      ] })
+    ] })
+  ] });
+}
+function PhotoGallery({ photos }) {
   const images = photos.map((photo) => ({
-    original: getUploadURL(photo.file.data.attributes.formats.small.url),
-    thumbnail: getUploadURL(photo.file.data.attributes.formats.thumbnail.url),
+    original: getUploadURL(photo.file.formats.small.url),
+    thumbnail: getUploadURL(photo.file.formats.thumbnail.url),
     originalHeight: 400,
     thumbnailHeight: 100
   }));
   return /* @__PURE__ */ jsx("div", { style: { backgroundColor: "black" }, children: /* @__PURE__ */ jsx(ImageGallery, { items: images, showThumbnails: true, showNav: true }) });
 }
-function Presentation({ collection, selectedPhotoIndex }) {
-  useRef(null);
-  const currentPhoto = useMemo(
-    () => collection == null ? void 0 : collection.attributes.photos[selectedPhotoIndex],
-    [collection, selectedPhotoIndex]
-  );
-  console.log(currentPhoto);
-  useMemo(
-    () => currentPhoto ? getUploadURL(currentPhoto.file.data.attributes.formats.large.url) : void 0,
-    [currentPhoto]
-  );
-  useMemo(
-    () => currentPhoto ? currentPhoto.description : void 0,
-    [currentPhoto]
-  );
-  useMemo(
-    () => currentPhoto ? currentPhoto.location : void 0,
-    [currentPhoto]
-  );
-  useMemo(
-    () => currentPhoto ? currentPhoto.camera : void 0,
-    [currentPhoto]
-  );
-  useMemo(
-    () => currentPhoto ? currentPhoto.date : void 0,
-    [currentPhoto]
-  );
+function Presentation({ collection }) {
   return /* @__PURE__ */ jsxs("section", { className: "presentation-section", children: [
-    /* @__PURE__ */ jsx("h1", { children: collection == null ? void 0 : collection.attributes.title }),
-    /* @__PURE__ */ jsx("p", { id: "presentation-summary", children: collection == null ? void 0 : collection.attributes.summary })
+    /* @__PURE__ */ jsx("h1", { children: collection == null ? void 0 : collection.title }),
+    /* @__PURE__ */ jsx("p", { id: "presentation-summary", children: collection == null ? void 0 : collection.summary })
   ] });
 }
 function Collection() {
   const { id } = useParams();
-  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
   const [collection, setCollection] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
@@ -198,21 +260,17 @@ function Collection() {
       });
       return;
     }
-    ApiService.fetchCollection(parseInt(id, 10)).then((response) => {
+    ApiService.fetchCollection(id).then((response) => {
       setCollection(response.data);
     }).catch((error) => {
       console.error(error);
     });
   }, [id]);
-  const onPhotoSelect = (photoIndex) => {
-    setSelectedPhotoIndex(photoIndex);
-    window.scrollTo(0, 0);
-  };
   if (!collection)
     return null;
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx(Presentation, { collection, selectedPhotoIndex }),
-    /* @__PURE__ */ jsx(PhotoGallery, { photos: (collection == null ? void 0 : collection.attributes.photos) || [], onPhotoSelect })
+  return /* @__PURE__ */ jsxs(PageLayout, { children: [
+    /* @__PURE__ */ jsx(Presentation, { collection }),
+    /* @__PURE__ */ jsx(PhotoGallery, { photos: (collection == null ? void 0 : collection.photos) || [] })
   ] });
 }
 function Contact() {
@@ -253,53 +311,36 @@ function Contact() {
     ] })
   ] });
 }
-const portrait = "/assets/portrait-BmivbdbN.jpg";
-function About() {
+function ReferenceCard({ link, title, media, date }) {
+  return /* @__PURE__ */ jsxs("a", { href: link, target: "_blank", children: [
+    title,
+    ", ",
+    media,
+    ", ",
+    date
+  ] });
+}
+function Journalism() {
+  const [references, setReferences] = useState([]);
+  useEffect(() => {
+    ApiService.fetchReferences().then((response) => {
+      setReferences(response.data);
+    });
+  }, []);
   return /* @__PURE__ */ jsxs(PageLayout, { children: [
-    /* @__PURE__ */ jsx(Title, { children: "About" }),
-    /* @__PURE__ */ jsxs("section", { id: "about", children: [
-      /* @__PURE__ */ jsx("img", { src: portrait, alt: "portrait" }),
-      /* @__PURE__ */ jsxs("p", { children: [
-        "Originally from Austria, Cristina Coellen is a multimedia journalist with a lot of love for all things video. She has graduated from ",
-        /* @__PURE__ */ jsx("strong", { children: "Durham University (UK)" }),
-        " with an undergraduate degree in French and History and from ",
-        /* @__PURE__ */ jsx("strong", { children: "Sciences Po Paris" }),
-        " with a Master’s in Journalism and International Security.",
-        /* @__PURE__ */ jsx("br", {}),
-        /* @__PURE__ */ jsx("br", {}),
-        "During her journalistic training, she notably worked for the German newspaper ",
-        /* @__PURE__ */ jsx("strong", { children: "Frankfurter Allgemeine Zeitung" }),
-        ", the video department of the French magazine ",
-        /* @__PURE__ */ jsx("strong", { children: "Le Nouvel Obs" }),
-        " and the evening news show of Franco-German TV channel ",
-        /* @__PURE__ */ jsx("strong", { children: "ARTE" }),
-        ".",
-        /* @__PURE__ */ jsx("br", {}),
-        /* @__PURE__ */ jsx("br", {}),
-        "She has also freelanced for a variety of media, among which ",
-        /* @__PURE__ */ jsx("strong", { children: "Slate" }),
-        ", ",
-        /* @__PURE__ */ jsx("strong", { children: "New Eastern Europe Magazine" }),
-        ", ",
-        /* @__PURE__ */ jsx("strong", { children: "Vorarlberger Nachrichten" }),
-        " and ",
-        /* @__PURE__ */ jsx("strong", { children: "Are We Europe" }),
-        ".",
-        /* @__PURE__ */ jsx("br", {}),
-        /* @__PURE__ */ jsx("br", {}),
-        "She is currently working at ",
-        /* @__PURE__ */ jsx("strong", { children: "Euronews" }),
-        " as a digital video producer."
-      ] })
-    ] })
+    /* @__PURE__ */ jsx(Title, { children: "Journalism" }),
+    /* @__PURE__ */ jsx("h3", { children: "Video and TV" }),
+    references.filter(({ type }) => type === ReferenceType.video).map((props) => /* @__PURE__ */ createElement(ReferenceCard, { ...props, key: props.documentId })),
+    /* @__PURE__ */ jsx("h3", { children: "Print" }),
+    references.filter(({ type }) => type === ReferenceType.print).map(({ ...props }) => /* @__PURE__ */ createElement(ReferenceCard, { ...props, key: props.documentId }))
   ] });
 }
 function App() {
   return /* @__PURE__ */ jsx(ParallaxProvider, { children: /* @__PURE__ */ jsxs(Routes, { children: [
     /* @__PURE__ */ jsx(Route, { path: routes.homepage.path, element: /* @__PURE__ */ jsx(Homepage, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: routes.portfolio.path, element: /* @__PURE__ */ jsx(Portfolio, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: routes.about.path, element: /* @__PURE__ */ jsx(About, {}) }),
+    /* @__PURE__ */ jsx(Route, { path: routes.photography.path, element: /* @__PURE__ */ jsx(Photography, {}) }),
     /* @__PURE__ */ jsx(Route, { path: routes.contact.path, element: /* @__PURE__ */ jsx(Contact, {}) }),
+    /* @__PURE__ */ jsx(Route, { path: routes.journalism.path, element: /* @__PURE__ */ jsx(Journalism, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "/portfolio/collection/:id", element: /* @__PURE__ */ jsx(Collection, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "/not-found", element: /* @__PURE__ */ jsx(NotFound, {}) }),
     /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })
