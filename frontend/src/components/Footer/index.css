@@ -18,6 +18,11 @@ footer * {
 @media (max-width: 768px) {
     footer {
         width: 100vw;
+        font-size: 0.8rem;
         margin-left: 0;
+    }
+
+    footer * {
+        margin: 16px;
     }
 }
