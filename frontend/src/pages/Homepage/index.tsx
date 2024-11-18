@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import PageLayout from '../../components/PageLayout';
 import Title from '../../components/Title';
-import portrait from '../../assets/images/portrait.jpg';
+import portrait from '../../assets/images/portrait.webp';
 import { NavLink } from 'react-router-dom';
 import routes from '../../router';
 
