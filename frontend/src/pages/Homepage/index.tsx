@@ -5,16 +5,19 @@ import Title from '../../components/Title';
 import portrait from '../../assets/images/portrait.webp';
 import { NavLink } from 'react-router-dom';
 import routes from '../../router';
+import { useTranslation } from 'react-i18next';
 
 function Homepage() {
+  const { t } = useTranslation();
+
   return (
     <PageLayout immersive>
       <div id="jumbo">
         <Title>Cristina Coellen</Title>
       </div>
       <nav id="CTA">
-        <NavLink to={routes.journalism.path}>Journalism</NavLink>
-        <NavLink to={routes.photography.path}>Photography</NavLink>
+        <NavLink to={routes.journalism.path}>{t('journalism')}</NavLink>
+        <NavLink to={routes.photography.path}>{t('photography')}</NavLink>
       </nav>
       <section id="about">
         <img src={portrait} alt="portrait"/>
