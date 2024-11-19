@@ -22,7 +22,7 @@ function PhotoGallery({ photos }: PhotoGalleryProps) {
 
   return (
     <div id="gallery" style={{ backgroundColor: 'black', minHeight: '0.6vh' }}>
-      <ImageGallery items={images} showThumbnails showNav/>
+      <ImageGallery items={images} showThumbnails showNav showPlayButton={false}/>
     </div>
   );
 }
