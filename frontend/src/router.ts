@@ -1,36 +1,42 @@
+import i18n from 'i18next';
+
 type Route = {
   path: string
   title: string
-  description: string
+  getDescription: () => string
 }
 
 type RouteName = 'homepage' | 'photography' | 'contact' | 'journalism';
 
+const getDescription = () => i18n.t('about').replace(/(<break \/>)+/g, ' ').replace(/<[^>]*>/g, '');
+
 const routes: Record<RouteName, Route> = {
   homepage: {
     title: 'Cristina Coellen',
-    description: 'D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.',
+    getDescription,
     path: '/'
   },
   photography: {
     title: 'Photography',
-    description: 'D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.',
+    getDescription,
     path: '/photography'
   },
   journalism: {
     title: 'Journalism',
-    description: 'D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.',
+    getDescription,
     path: '/journalism'
   },
   contact: {
     title: 'Contact',
-    description: 'D’origine autrichienne, Cristina Coellen est journaliste multimédia. Elle est diplômée de l’école de journalisme de Sciences Po Paris et a travaillé pour des médias français, allemand et européens.',
+    getDescription,
     path: '/contact'
   },
 }
 
+const getRoutes = () => routes;
+
 export function findRouteByPath(path: string): Route | undefined {
-  return Object.values(routes).find(route => route.path === path);
+  return Object.values(getRoutes()).find(route => route.path === path);
 }
 
 export default routes;
