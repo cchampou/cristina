@@ -1,3 +1,5 @@
+import i18n from 'i18next';
+
 export type StrapiResponse<T> = {
   data: T
 }
@@ -65,7 +67,13 @@ export class ApiService {
     }
   }
 
-  private static async fetch<T>(pathname: string, options: RequestInit = {}): Promise<T> {
+  private static async fetch<T>(pathname: string, options: RequestInit = {}, searchParams: Record<string, string> = {}): Promise<T> {
+    const searchParamsObject = new URLSearchParams(searchParams);
+    searchParamsObject.set('locale', i18n.language);
+    const search = new URLSearchParams(searchParamsObject).toString();
+    if (search) {
+      pathname += '?' + search;
+    }
     const response = await fetch(this.apiUrl + pathname, {
       headers: this.buildHeaders(),
       ...options
@@ -74,15 +82,15 @@ export class ApiService {
   }
 
   public static fetchCollections(): Promise<StrapiResponse<Collection[]>> {
-    return this.fetch('/collections?populate=photos.file');
+    return this.fetch('/collections', {}, { populate: 'photos.file' });
   }
 
   public static fetchCollection(documentId: string): Promise<StrapiResponse<Collection>> {
-    return this.fetch(`/collections/${documentId}?populate=photos.file`);
+    return this.fetch(`/collections/${documentId}`, {}, { populate: 'photos.file' });
   }
 
   public static fetchReferences(): Promise<StrapiResponse<Reference[]>> {
-    return this.fetch('/references?sort=date:desc');
+    return this.fetch('/references', {}, { sort: 'date:desc' });
   }
 
   public static fetchReference(id: string): Promise<StrapiResponse<Reference>> {

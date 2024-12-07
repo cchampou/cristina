@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import CollectionCard from '../../components/CollectionCard';
@@ -8,6 +8,7 @@ import './styles.css';
 import PageLayout from '../../components/PageLayout';
 import Title from '../../components/Title';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 
 function Photography() {
@@ -15,12 +16,9 @@ function Photography() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [nbCollectionLoaded, setNbCollectionLoaded] = useState(0);
-  const [hasTimedout, setHasTimedout] = useState(false);
+  const [hasTimeout, setHasTimeout] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setHasTimedout(true);
-    }, 3000);
+  const refresh = useCallback(() => {
     ApiService.fetchCollections().then((response) => {
       setCollections(response.data);
     }).catch((error) => {
@@ -28,11 +26,19 @@ function Photography() {
     });
   }, []);
 
+  useEffect(() => {
+    i18n.on('languageChanged', refresh);
+    setTimeout(() => {
+      setHasTimeout(true);
+    }, 3000);
+    refresh();
+  }, []);
+
   return (
     <PageLayout>
       <Title>{t('photography')}</Title>
       <div id="collection-carousel" style={{
-        height: collections.length > 0 && nbCollectionLoaded === collections.length || hasTimedout ? '200px' : '0',
+        height: collections.length > 0 && nbCollectionLoaded === collections.length || hasTimeout ? '200px' : '0',
       }}>
         {collections.map((collection) => (
           <CollectionCard
