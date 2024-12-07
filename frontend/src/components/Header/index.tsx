@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import routes from '../../router';
 import './index.css';
+import { supportedLocales } from '../../../app.config';
 
 type Props = {
   immersive?: boolean
@@ -33,8 +34,8 @@ function Header({ immersive }: Props) {
   const backgroundColor = immersive || !isOpen ? 'transparent' : 'white';
 
   const toggleLanguage = () => {
-    const newLanguage = i18n.language === 'en' ? 'fr' : 'en';
-    i18n.changeLanguage(newLanguage);
+    const nextLocale = supportedLocales.find(locale => locale !== i18n.language);
+    i18n.changeLanguage(nextLocale);
   }
 
   return <nav id="header" style={{
@@ -48,7 +49,7 @@ function Header({ immersive }: Props) {
       <NavLink to={routes.photography.path}>{t('photography')}</NavLink>
       <NavLink to={routes.journalism.path}>{t('journalism')}</NavLink>
       <NavLink to={routes.contact.path}>{t('Contact')}</NavLink>
-      <a href="#" onClick={toggleLanguage}>🇬🇧/🇫🇷</a>
+      <button onClick={toggleLanguage} style={{ display: 'inline', textWrap: 'nowrap'}}>🇬🇧/🇫🇷</button>
     </>)}
   </nav>
 }

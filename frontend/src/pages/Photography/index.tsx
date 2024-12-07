@@ -7,11 +7,13 @@ import { Collection, ApiService } from '../../services/api';
 import './styles.css';
 import PageLayout from '../../components/PageLayout';
 import Title from '../../components/Title';
+import { useTranslation } from 'react-i18next';
 
 
 function Photography() {
   const [collections, setCollections] = useState<Collection[]>([]);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [nbCollectionLoaded, setNbCollectionLoaded] = useState(0);
   const [hasTimedout, setHasTimedout] = useState(false);
 
@@ -28,7 +30,7 @@ function Photography() {
 
   return (
     <PageLayout>
-      <Title>Photography</Title>
+      <Title>{t('photography')}</Title>
       <div id="collection-carousel" style={{
         height: collections.length > 0 && nbCollectionLoaded === collections.length || hasTimedout ? '200px' : '0',
       }}>
