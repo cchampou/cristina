@@ -1,30 +1,40 @@
 import React, { useEffect, useState } from 'react';
 
 import './index.css';
-import PageLayout from '../../components/PageLayout';
 import Title from '../../components/Title';
 import ReferenceCard from '../../components/ReferenceCard';
 import { ApiService, Reference, ReferenceType } from '../../services/api';
+import { useTranslation } from 'react-i18next';
+import Loading, { useLoading } from '../../components/Loading';
 
 function Journalism() {
+  const { loadingState, startLoading, stopLoading } = useLoading();
   const [references, setReferences] = useState<Reference[]>([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
+    console.log('fetching references');
+    startLoading();
     ApiService.fetchReferences().then((response) => {
       setReferences(response.data)
+      stopLoading();
     });
   }, []);
 
   return (
-    <PageLayout>
-      <Title>Journalism</Title>
-      <h3>Video and TV</h3>
+    <>
+      <Title>{t('journalism')}</Title>
+      <h3>{t('video and TV')}</h3>
+      <Loading loadingState={loadingState}>
       {references.filter(({ type }) => type === ReferenceType.video)
         .map((props) => <ReferenceCard {...props} key={props.documentId}/>)}
-      <h3>Print</h3>
+      </Loading>
+      <h3>{t('print')}</h3>
+      <Loading loadingState={loadingState}>
       {references.filter(({ type }) => type === ReferenceType.print)
-        .map(({ ...props }) => <ReferenceCard {...props} key={props.documentId} />)}
-    </PageLayout>
+        .map(({ ...props }) => <ReferenceCard {...props} key={props.documentId}/>)}
+      </Loading>
+    </>
   );
 }
 

@@ -2,13 +2,12 @@ import React from 'react';
 
 import './index.css';
 
-import PageLayout from '../../components/PageLayout';
 import Title from '../../components/Title';
 
 
 function Contact() {
   return (
-    <PageLayout>
+    <>
       <Title>Contact</Title>
       <div id="socials">
         <a href="https://www.linkedin.com/in/cristina-c-7357bb18a/" target="_blank">
@@ -37,7 +36,7 @@ function Contact() {
           Instagram
         </a>
       </div>
-    </PageLayout>
+    </>
   );
 }
 

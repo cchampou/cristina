@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useMatch } from 'react-router-dom';
 import Photography from './pages/Photography';
 import NotFound from './pages/NotFound';
 import Homepage from "./pages/Homepage";
@@ -9,19 +9,22 @@ import Journalism from './pages/Journalism';
 
 import routes from './router';
 import './global.css';
+import PageLayout from './components/PageLayout';
 
 function App() {
+  const isHomepage = !!useMatch(routes.homepage.path);
 
   return (
-    <Routes>
-      <Route path={routes.homepage.path} element={<Homepage/>}/>
-      <Route path={routes.photography.path} element={<Photography/>}/>
-      <Route path={routes.contact.path} element={<Contact/>}/>
-      <Route path={routes.journalism.path} element={<Journalism/>}/>
-      <Route path="/portfolio/collection/:id" element={<Collection/>}/>
-      <Route path="/not-found" element={<NotFound/>}/>
-      <Route path="*" element={<NotFound/>}/>
-    </Routes>
+    <PageLayout immersive={isHomepage}>
+      <Routes>
+        <Route path={routes.homepage.path} element={<Homepage/>}/>
+        <Route path={routes.photography.path} element={<Photography/>}/>
+        <Route path={routes.contact.path} element={<Contact/>}/>
+        <Route path={routes.journalism.path} element={<Journalism/>}/>
+        <Route path="/portfolio/collection/:id" element={<Collection/>}/>
+        <Route path="*" element={<NotFound/>}/>
+      </Routes>
+    </PageLayout>
   );
 }
 

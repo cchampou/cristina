@@ -17,12 +17,14 @@ footer * {
 
 @media (max-width: 768px) {
     footer {
-        width: 100vw;
+        padding: 16px;
+        width: calc(100vw - 32px);
         font-size: 0.8rem;
         margin-left: 0;
+        flex-direction: column;
     }
 
     footer * {
-        margin: 16px;
+        margin: 4px;
     }
 }

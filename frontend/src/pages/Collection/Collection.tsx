@@ -5,7 +5,6 @@ import type { Collection } from '../../services/api';
 import { ApiService } from '../../services/api';
 import PhotoGallery from '../../components/PhotoGallery';
 import Presentation from '../../components/Presentation';
-import PageLayout from '../../components/PageLayout';
 
 type CollectionParams = {
   id: string;
@@ -34,10 +33,10 @@ function Collection() {
 
   if (!collection) return null;
 
-  return (<PageLayout>
+  return (<>
       <Presentation collection={collection} />
       <PhotoGallery photos={collection?.photos || []} />
-    </PageLayout>
+    </>
   );
 }
 

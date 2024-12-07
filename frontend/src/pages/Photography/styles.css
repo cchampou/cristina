@@ -4,6 +4,12 @@
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
+    height: 200px;
+}
+
+#collection-loader {
+    flex: 1;
+    text-align: center;
 }
 
 /* make a :after with a white gradient to indicate the list is horizontally scrollable */

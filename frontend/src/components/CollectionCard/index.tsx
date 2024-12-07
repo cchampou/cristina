@@ -14,7 +14,7 @@ type CollectionCardProps = {
 function CollectionCard({ collection, onClick, onLoaded }: CollectionCardProps) {
 
   const imageRef = React.useRef<HTMLImageElement>(null);
-  
+
   const date = collection.date ? new Date(collection.date).toLocaleDateString() : '';
 
   const loadHandler = () => {
@@ -25,10 +25,12 @@ function CollectionCard({ collection, onClick, onLoaded }: CollectionCardProps) 
     const localImageRef = imageRef.current;
     if (imageRef.current) {
       localImageRef?.addEventListener('load', loadHandler);
+      localImageRef?.addEventListener('error', loadHandler);
     }
     return () => {
       if (imageRef.current) {
         localImageRef?.removeEventListener('load', loadHandler);
+        localImageRef?.removeEventListener('error', loadHandler);
       }
     };
   }, []);
