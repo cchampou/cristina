@@ -41,7 +41,7 @@ const relativeTemplatePath = isProduction ? 'dist/client/index.html' : 'index.ht
 const templatePath = path.resolve(__dirname, relativeTemplatePath);
 
 app.use('*', async (req, res, next) => {
-  const pathName = req.originalUrl
+  const pathName = req.path;
   const host = req.get('host') ?? defaultHost;
   const scheme = req.protocol;
 
