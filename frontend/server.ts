@@ -15,7 +15,6 @@ if (isProduction) {
   console.info('Running in production mode');
 }
 
-
 const app = express();
 app.use(cookieParser());
 app.use(langMiddleware);
@@ -57,37 +56,4 @@ app.use('*', async (req, res, next) => {
   }
 })
 
-app.listen(5173)
-
-// async function createDevServer() {
-//   const app = createBaseApp();
-//
-//   const vite = await createViteServer({
-//     server: { middlewareMode: true },
-//     appType: 'custom'
-//   })
-//   app.use(vite.middlewares)
-//
-//   app.use('*', async (req, res, next) => {
-//     const url = req.originalUrl
-//
-//     try {
-//
-//       let template = fs.readFileSync(
-//         path.resolve(__dirname, 'index.html'),
-//         'utf-8',
-//       )
-//       template = await vite.transformIndexHtml(url, template)
-//       const pathName = url;
-//       const { render } = await vite.ssrLoadModule('/src/entry-server.tsx')
-//       const appHtml = await render(pathName);
-//       const html = htmlReplacement(template, appHtml, pathName, req.locale);
-//       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
-//     } catch (e) {
-//       vite.ssrFixStacktrace(e as Error);
-//       next(e)
-//     }
-//   })
-//
-//   app.listen(3000)
-// }
+app.listen(5173);
