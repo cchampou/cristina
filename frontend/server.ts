@@ -6,6 +6,7 @@ import { createServer as createViteServer } from 'vite'
 import { langMiddleware } from './server/middlewares/lang';
 import { HTMLReplacement } from './server/utils/HTMLReplacement';
 import { readAndOptionallyTransformTemplate } from './server/utils/template';
+import { defaultHost } from './app.config';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -41,6 +42,8 @@ const templatePath = path.resolve(__dirname, relativeTemplatePath);
 
 app.use('*', async (req, res, next) => {
   const pathName = req.originalUrl
+  const host = req.get('host') ?? defaultHost;
+  const scheme = req.protocol;
 
   try {
     const template = await readAndOptionallyTransformTemplate(templatePath, pathName, vite);
@@ -48,7 +51,7 @@ app.use('*', async (req, res, next) => {
       // @ts-expect-error - expect error because of dynamic import
       await import('./dist/server/entry-server.js') : await vite.ssrLoadModule('/src/entry-server.tsx')
     const appHtml = await render(pathName);
-    const html = HTMLReplacement(template, appHtml, pathName, req.locale);
+    const html = HTMLReplacement(template, appHtml, scheme, host, pathName, req.locale);
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
     console.error(e);
