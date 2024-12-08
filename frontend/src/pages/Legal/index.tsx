@@ -11,7 +11,9 @@ function Legal() {
       <h1>Legal</h1>
       <SubTitle>{t('editorAndPublisher.title')}</SubTitle>
       <p>
-        <Trans i18nKey="editorAndPublisher.content" />
+        <Trans i18nKey="editorAndPublisher.content" components={{
+          br: <br/>,
+        }} />
       </p>
       <SubTitle>{t('hosting.title')}</SubTitle>
       <p>
