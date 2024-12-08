@@ -11,4 +11,6 @@ COPY . /app
 
 RUN yarn build
 
+RUN yarn --production
+
 CMD ["yarn", "start"]
