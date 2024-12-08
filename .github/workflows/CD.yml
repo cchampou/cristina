@@ -25,6 +25,7 @@ jobs:
     name: Deploy the frontend
     runs-on: ubuntu-latest
     environment: Production
+    needs: build
     steps:
       - name: Pull the frontend image
         uses: appleboy/ssh-action@v1.2.0
