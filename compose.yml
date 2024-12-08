@@ -12,6 +12,7 @@ services:
     volumes:
       - ./db-data:/var/lib/postgresql/data
   strapi:
+    image: "rg.fr-par.scw.cloud/cristina/strapi:latest"
     build: strapi
     depends_on:
       - strapiDB
