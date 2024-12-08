@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.3](https://github.com/cchampou/cristina/compare/v0.0.2...v0.0.3) (2024-12-08)
+
+
+### Bug Fixes
+
+* **CD:** wrong trigger ([1df6423](https://github.com/cchampou/cristina/commit/1df6423f9b927bb3eecb5f751781bf0d675d9e81))
+
 ## [0.0.2](https://github.com/cchampou/cristina/compare/v0.0.1...v0.0.2) (2024-12-08)
 
 
