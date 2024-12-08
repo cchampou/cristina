@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_default_photos",
+  "info": {
+    "displayName": "Photo",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "description": {
+      "type": "text"
+    },
+    "date": {
+      "type": "date"
+    },
+    "time": {
+      "type": "time"
+    },
+    "camera": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    }
+  }
+}

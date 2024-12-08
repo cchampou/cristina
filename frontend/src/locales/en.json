@@ -1,0 +1,28 @@
+{
+  "home": "Home",
+  "photography": "Photography",
+  "journalism": "Journalism",
+  "contact": "Contact",
+  "video and TV": "Video and TV",
+  "print": "Print",
+  "legal notice": "Legal Notice",
+  "privacy policy": "Privacy Policy",
+  "about": "Originally from Austria, Cristina Coellen is a multimedia journalist with a lot of love for all things video.<break /><break />She has graduated from <bold>Durham University (UK)</bold> with an undergraduate degree in French and History and from <bold>Sciences Po Paris</bold> with a Master’s in Journalism and International Security.<break /><break />During her journalistic training, she notably worked for the German newspaper <bold>Frankfurter Allgemeine Zeitung</bold>, the video department of the French magazine <bold>Le Nouvel Obs</bold> and the evening news show of Franco-German TV channel <bold>ARTE</bold>.<break /><break />She has also freelanced for a variety of media, among which <bold>Slate</bold>, <bold>New Eastern Europe Magazine</bold>, <bold>Vorarlberger Nachrichten</bold> an <bold>Are We Europe</bold>.<break /><break />She is currently working a <bold>Euronews</bold> as a digital video producer.",
+  "editorAndPublisher": {
+    "title": "Editor and Publisher",
+    "content": "Cristina Coellen<br />contact@cristina-collen.com"
+  },
+  "hosting": {
+    "title": "Hosting",
+    "content": "SCALEWAY SAS<br />8 rue de la Ville l'Evêque<br />75008 Paris<br />France"
+  },
+  "property": {
+    "title": "Intellectual Property",
+    "content": "The contents of this website are protected by copyright. Any reproduction or use without permission is prohibited."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "content": "This website only uses cookies for its proper functioning."
+  },
+  "error": "An error occurred"
+}

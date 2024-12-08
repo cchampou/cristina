@@ -1,0 +1,49 @@
+nav#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 50vw;
+    width: 50vw;
+    z-index: 1;
+}
+
+#burger {
+    background: none;
+    border: none;
+    padding: 16px;
+    width: 48px;
+    height: 64px;
+    align-self: flex-end;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+    text-align: right;
+}
+
+nav#header a {
+    padding: 1rem 0;
+    color: inherit;
+    font-family: "Kanit", sans-serif;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    nav#header {
+        width: 100%;
+        margin: 0;
+        flex-direction: column;
+        position: absolute !important;
+    }
+
+    nav#header button {
+        display: inline-block;
+        text-wrap: nowrap;
+    }
+
+    nav#header a, nav#header button {
+        padding-right: 16px;
+    }
+}

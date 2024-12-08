@@ -1,0 +1,26 @@
+#layout {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main {
+    margin: auto;
+}
+
+/* main with the data-immersive set to true */
+main[data-immersive="true"] {
+    width: 100%;
+}
+
+/* main with the data-immersive set to false */
+main[data-immersive="false"] {
+    width: 80%;
+}
+
+@media (max-width: 768px) {
+    main[data-immersive="false"] {
+        width: 90%;
+    }
+}
