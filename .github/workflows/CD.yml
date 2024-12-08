@@ -4,8 +4,6 @@ on:
   push:
     tag:
       - 'v*.*.*'
-    branches:
-      - main
 jobs:
   build:
     name: Build and deploy the frontend
