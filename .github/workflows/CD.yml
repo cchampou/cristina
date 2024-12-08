@@ -6,9 +6,8 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 jobs:
   build:
-    name: Build and deploy the frontend
+    name: Build the frontend
     runs-on: ubuntu-latest
-    environment: Production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,6 +21,11 @@ jobs:
         run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login rg.fr-par.scw.cloud -u cristina --password-stdin
       - name: Push the frontend image
         run: docker push rg.fr-par.scw.cloud/cristina/frontend:latest
+  deploy:
+    name: Deploy the frontend
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
       - name: Pull the frontend image
         uses: appleboy/ssh-action@v1.2.0
         with:
