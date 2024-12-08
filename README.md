@@ -1,22 +1,4 @@
-# Development instructions
-
-To be updated...
-
 # Deployment instructions
 
-To deploy the application, connect to the server using the root user,
-then use the `cchampou` user.
-
-```bash
-su cchampou
-```
-
-Then, go to the project directory and pull the latest changes from the
-repository.
-
-```bash
-cd /home/cchampou/cristina
-git pull
-```
-
-Finally, restart the application using docker compose.
+The application is deployed automatically once you push to the main branch.
+You can follow the deployment progress and its status in the [Production deployment tab](https://github.com/cchampou/cristina/deployments/Production).
