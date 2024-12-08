@@ -1,5 +1,6 @@
 services:
   frontend:
+    image: rg.fr-par.scw.cloud/cristina/frontend:latest
     build: frontend
     ports:
       - "5173:5173"
