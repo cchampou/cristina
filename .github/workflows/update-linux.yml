@@ -10,7 +10,7 @@ jobs:
       - name: Connect to VPS via SSH
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: whoami
