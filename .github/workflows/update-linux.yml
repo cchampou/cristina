@@ -1,0 +1,18 @@
+name: Update Linux
+run-name: Runs apt update and upgrade
+
+on: [workflow_dispatch]
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - name: Connect to VPS via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            echo ${{ secrets.PASSWORD }} | sudo -S apt update
+            echo ${{ secrets.PASSWORD }} | sudo -S apt upgrade -y

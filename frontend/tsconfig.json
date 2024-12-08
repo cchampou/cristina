@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "jsx": "react",
+    "moduleResolution": "Node",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+  }
+}

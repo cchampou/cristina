@@ -1,0 +1,9 @@
+h2 {
+    font-family: "Kanit", sans-serif;
+    font-size: 2rem;
+    line-height: 2rem;
+    margin: 1rem 0;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: inherit;
+}

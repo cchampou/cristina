@@ -1,0 +1,30 @@
+services:
+  frontend:
+    image: rg.fr-par.scw.cloud/cristina/frontend:latest
+    platform: linux/amd64
+    build: frontend
+    ports:
+      - "5173:5173"
+  strapiDB:
+    image: postgres:14
+    platform: linux/amd64
+    env_file:
+      - ./strapi/.env
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+  strapi:
+    image: "rg.fr-par.scw.cloud/cristina/strapi:latest"
+    platform: linux/amd64
+    build: strapi
+    depends_on:
+      - strapiDB
+    ports:
+      - "1337:1337"
+    env_file:
+      - ./strapi/.env
+    volumes:
+      - ./strapi/config:/opt/app/config
+      - ./strapi/src:/opt/app/src
+      - ./strapi/package.json:/opt/package.json
+      - ./strapi/yarn.lock:/opt/yarn.lock
+      - ./strapi/public/uploads:/opt/app/public/uploads
