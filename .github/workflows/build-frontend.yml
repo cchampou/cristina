@@ -1,6 +1,6 @@
 name: Frontend CD
 run-name: Builds frontend image and pushes it to the registry
-on: [workflow_dispatch]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
