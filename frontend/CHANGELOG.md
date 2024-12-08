@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.8](https://github.com/cchampou/cristina/compare/v0.0.7...v0.0.8) (2024-12-08)
+
+
+### Features
+
+* **CD:** manual approved deployment ([58e1534](https://github.com/cchampou/cristina/commit/58e153454687faea25d0c7858f1a864480a7dfa5))
+
 ## 0.0.7 (2024-12-08)
 
 ## [0.0.6](https://github.com/cchampou/cristina/compare/v0.0.5...v0.0.6) (2024-12-08)
