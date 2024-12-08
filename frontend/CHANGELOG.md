@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.4](https://github.com/cchampou/cristina/compare/v0.0.3...v0.0.4) (2024-12-08)
+
+
+### Bug Fixes
+
+* **CD:** remove push trigger ([c5acaa3](https://github.com/cchampou/cristina/commit/c5acaa3fc24b082726a53c4ddaa16132e547714b))
+* **CD:** typo in CD configuration ([682c922](https://github.com/cchampou/cristina/commit/682c92234af9d7fd7d00556bc1827e8acb0d9346))
+* **CD:** version tag matchnig ([d8ffe75](https://github.com/cchampou/cristina/commit/d8ffe7537934581737469bb643361bb2a4f98370))
+
 ## [0.0.3](https://github.com/cchampou/cristina/compare/v0.0.2...v0.0.3) (2024-12-08)
 
 
