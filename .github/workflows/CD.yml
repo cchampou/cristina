@@ -1,8 +1,11 @@
 name: Frontend CD
 run-name: Automated frontend deployment
 on:
-  tag:
-    - 'v*.*.*'
+  push:
+    tag:
+      - 'v*.*.*'
+    branches:
+      - main
 jobs:
   build:
     name: Build and deploy the frontend
