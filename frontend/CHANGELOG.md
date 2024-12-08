@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.9](https://github.com/cchampou/cristina/compare/v0.0.8...v0.0.9) (2024-12-08)
+
+
+### Bug Fixes
+
+* **CD:** dependency on job added ([8703860](https://github.com/cchampou/cristina/commit/8703860d8df85803d151d94edad091b79c550447))
+
 ## [0.0.8](https://github.com/cchampou/cristina/compare/v0.0.7...v0.0.8) (2024-12-08)
 
 
