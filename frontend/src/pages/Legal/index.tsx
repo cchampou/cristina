@@ -15,6 +15,15 @@ function Legal() {
           br: <br/>,
         }} />
       </p>
+      <SubTitle>{t('dev.title')}</SubTitle>
+      <p>
+        <Trans i18nKey="dev.content" components={{
+          br: <br/>,
+          GHLink: <a href="https://github.com/cchampou/cristina"/>,
+        }}>
+          <a href="http://github.com/cchampou/cristinacoellen">GitHub</a>
+        </Trans>
+      </p>
       <SubTitle>{t('hosting.title')}</SubTitle>
       <p>
         <Trans i18nKey="hosting.content" components={{

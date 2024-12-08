@@ -24,5 +24,9 @@
     "title": "Cookies",
     "content": "Ce site n'utilise les cookies que pour son bon fonctionnement."
   },
+    "dev": {
+        "title": "Développement",
+        "content": "Ce site a été développé par Clément Champouillon.<br />clement@champouillon.com<br />Vous pouvez trouver le code source sur <GHLink>GitHub</GHLink>."
+    },
   "error": "Une erreur est survenue"
 }
