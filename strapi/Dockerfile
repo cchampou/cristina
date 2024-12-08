@@ -11,7 +11,7 @@ ENV PATH /opt/node_modules/.bin:$PATH
 ENV PUBLIC_URL $PUBLIC_URL
 WORKDIR /opt/app
 COPY . .
-RUN yarn build
+RUN yarn build --no-optimization
 
 # Creating final production image
 FROM node:18-alpine
