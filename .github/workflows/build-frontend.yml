@@ -9,6 +9,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Go to frontend directory
         run: cd frontend
+      - name: Show content and path of current directory
+        run: ls -la && pwd
       - name: Build the frontend image
         run: docker build -t rg.fr-par.scw.cloud/cristina/frontend:latest .
       - name: Login to the registry
