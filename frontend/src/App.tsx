@@ -10,6 +10,7 @@ import Journalism from './pages/Journalism';
 import routes from './router';
 import './global.css';
 import PageLayout from './components/PageLayout';
+import Legal from './pages/Legal';
 
 function App() {
   const isHomepage = !!useMatch(routes.homepage.path);
@@ -21,6 +22,7 @@ function App() {
         <Route path={routes.photography.path} element={<Photography/>}/>
         <Route path={routes.contact.path} element={<Contact/>}/>
         <Route path={routes.journalism.path} element={<Journalism/>}/>
+        <Route path={routes.legal.path} element={<Legal/>}/>
         <Route path="/portfolio/collection/:id" element={<Collection/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>

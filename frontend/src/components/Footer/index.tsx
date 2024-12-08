@@ -9,8 +9,7 @@ function Footer() {
   return (
     <footer>
       <p>Copyright © Cristina Coellen 2024</p>
-      <Link to="#">{t('legal notice')}</Link>
-      <Link to="#">{t('privacy policy')}</Link>
+      <Link to="/legal">{t('legal notice')}</Link>
     </footer>
   );
 }

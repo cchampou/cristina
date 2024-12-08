@@ -6,7 +6,7 @@ type Route = {
   getDescription: () => string
 }
 
-type RouteName = 'homepage' | 'photography' | 'contact' | 'journalism';
+type RouteName = 'homepage' | 'photography' | 'contact' | 'journalism' | 'legal';
 
 const getDescription = () => i18n.t('about').replace(/(<break \/>)+/g, ' ').replace(/<[^>]*>/g, '');
 
@@ -31,6 +31,11 @@ const routes: Record<RouteName, Route> = {
     getDescription,
     path: '/contact'
   },
+  legal: {
+    title: 'Legal',
+    getDescription,
+    path: '/legal'
+  }
 }
 
 const getRoutes = () => routes;
