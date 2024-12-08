@@ -3,6 +3,7 @@ run-name: Automated frontend deployment
 on: [push]
 jobs:
   build:
+    name: Build and deploy the frontend
     runs-on: ubuntu-latest
     environment: Production
     steps:
@@ -24,4 +25,4 @@ jobs:
           script: |
             docker pull rg.fr-par.scw.cloud/cristina/frontend:latest
             cd ~/cristina
-            docker-compose up -d
+            docker compose up -d
