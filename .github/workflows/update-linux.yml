@@ -1,11 +1,11 @@
 name: Update Linux
 run-name: Runs apt update and upgrade
 
-on: [workflow_dispatch]
+on: [push]
 jobs:
   update:
     runs-on: ubuntu-latest
-    environment: production
+    environment: Production
     steps:
       - name: Connect to VPS via SSH
         uses: appleboy/ssh-action@v1.2.0
