@@ -1,5 +1,7 @@
 import React, { PropsWithChildren, useState } from 'react';
 import { ThreeDot } from 'react-loading-indicators';
+import { useTranslation } from 'react-i18next';
+import './styles.css';
 
 export enum LoadingState {
   idle = 'idle',
@@ -26,18 +28,20 @@ export const useLoading = () => {
 
 type Props = PropsWithChildren<{
   loadingState: LoadingState;
+  loadingMessage?: string;
 }>
 
-function Loading({ loadingState, children }: Props) {
-
+function Loading({ loadingState, children, loadingMessage }: Props) {
+  const { t } = useTranslation();
   return (
     <div style={{ position: 'relative' }}>
       {loadingState === LoadingState.loading &&
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+        <div className="loading-container">
+          {loadingMessage && <p className="loading-text">{loadingMessage}</p>}
           <ThreeDot color="black"/>
         </div>
       }
-      {loadingState === LoadingState.error && <h1>Error</h1>}
+      {loadingState === LoadingState.error && <p className="error-message">{t('error')}</p>}
       <div style={{ opacity: loadingState === LoadingState.loading ? 0 : 1, transition: 'opacity 0.1s' }}>
         {children}
       </div>

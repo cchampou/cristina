@@ -23,5 +23,6 @@
   "cookies": {
     "title": "Cookies",
     "content": "Ce site n'utilise les cookies que pour son bon fonctionnement."
-  }
+  },
+  "error": "Une erreur est survenue"
 }

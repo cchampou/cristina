@@ -23,5 +23,6 @@
   "cookies": {
     "title": "Cookies",
     "content": "This website only uses cookies for its proper functioning."
-  }
+  },
+  "error": "An error occurred"
 }

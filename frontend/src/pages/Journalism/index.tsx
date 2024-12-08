@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import Loading, { useLoading } from '../../components/Loading';
 
 function Journalism() {
-  const { loadingState, startLoading, stopLoading } = useLoading();
+  const { loadingState, startLoading, stopLoading, setError } = useLoading();
   const [references, setReferences] = useState<Reference[]>([]);
   const { t } = useTranslation();
 
@@ -17,6 +17,9 @@ function Journalism() {
     ApiService.fetchReferences().then((response) => {
       setReferences(response.data)
       stopLoading();
+    }).catch((error) => {
+      console.error(error);
+      setError();
     });
   }, []);
 

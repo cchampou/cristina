@@ -19,6 +19,7 @@ function Photography() {
   const { t } = useTranslation();
 
   const refresh = useCallback(() => {
+    setNbImageLoaded(-1);
     startLoading();
     ApiService.fetchCollections().then(async (response) => {
       setCollections(response.data);
@@ -46,7 +47,7 @@ function Photography() {
   return (
     <>
       <Title>{t('photography')}</Title>
-      <Loading loadingState={loadingState}>
+      <Loading loadingState={loadingState} loadingMessage={nbImageLoaded.toString()}>
         <div id="collection-carousel">
           {collections.map((collection) => (
             <CollectionCard
