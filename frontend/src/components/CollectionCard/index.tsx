@@ -27,6 +27,11 @@ function CollectionCard({ collection, onClick, onLoaded }: CollectionCardProps) 
       localImageRef?.addEventListener('load', loadHandler);
       localImageRef?.addEventListener('error', loadHandler);
     }
+
+    setTimeout(() => {
+        loadHandler();
+    }, 1000);
+
     return () => {
       if (imageRef.current) {
         localImageRef?.removeEventListener('load', loadHandler);

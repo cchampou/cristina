@@ -47,7 +47,7 @@ function Photography() {
   return (
     <>
       <Title>{t('photography')}</Title>
-      <Loading loadingState={loadingState} loadingMessage={nbImageLoaded.toString()}>
+      <Loading loadingState={loadingState}>
         <div id="collection-carousel">
           {collections.map((collection) => (
             <CollectionCard
