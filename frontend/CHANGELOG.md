@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.2](https://github.com/cchampou/cristina/compare/v0.0.1...v0.0.2) (2024-12-08)
+
+
+### Features
+
+* **front:** echo version in the footer ([c9a84c2](https://github.com/cchampou/cristina/commit/c9a84c2d544845e6febf3d32a23aca893777506d))
+
+
+### Bug Fixes
+
+* **CD:** only CD on version tags ([012a4d0](https://github.com/cchampou/cristina/commit/012a4d06cc0f1ffcbb38e2f5d6b78b25fb8383d3))
+
 ## [0.0.1](https://github.com/cchampou/cristina/compare/v0.0.0...v0.0.1) (2024-12-08)
 
 ## 0.0.0 (2024-12-08)
