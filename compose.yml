@@ -13,6 +13,7 @@ services:
       - ./db-data:/var/lib/postgresql/data
   strapi:
     image: "rg.fr-par.scw.cloud/cristina/strapi:latest"
+    platform: linux/amd64
     build: strapi
     depends_on:
       - strapiDB
