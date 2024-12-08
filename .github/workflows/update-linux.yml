@@ -1,7 +1,7 @@
 name: Update Linux
 run-name: Runs apt update and upgrade
 
-on: [push]
+on: [workflow_dispatch]
 jobs:
   update:
     runs-on: ubuntu-latest
