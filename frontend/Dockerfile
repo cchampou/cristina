@@ -6,8 +6,6 @@ COPY . /app
 
 RUN corepack enable
 RUN yarn set version berry
-RUN yarn install
-
-RUN yarn build
+RUN yarn install && yarn build && yarn workspaces focus --production
 
 CMD ["yarn", "start"]
