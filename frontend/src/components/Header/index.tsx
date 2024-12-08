@@ -22,6 +22,10 @@ function Header({ immersive }: Props) {
     }
   }
 
+  const handleClick = () => {
+    if (isOpen) setIsOpen(false);
+  }
+
   useEffect(() => {
     handleResize();
     const observer = new ResizeObserver(() => {
@@ -44,7 +48,7 @@ function Header({ immersive }: Props) {
     color: immersive ? 'white' : 'black',
     textShadow: immersive ? '0 2px 4px gray' : 'none',
     backgroundColor: backgroundColor,
-  }}>
+  }} onClick={handleClick}>
     <button id="burger" onClick={() => setIsOpen(prev => !prev)} style={{ color: immersive ? 'white' : 'black' }}>=</button>
     {isOpen && (<><NavLink to={routes.homepage.path}>{t('home')}</NavLink>
       <NavLink to={routes.photography.path}>{t('photography')}</NavLink>
