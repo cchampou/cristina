@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.5](https://github.com/cchampou/cristina/compare/v0.0.4...v0.0.5) (2024-12-08)
+
+
+### Bug Fixes
+
+* **CD:** write version to .env for reliability ([a5b47d1](https://github.com/cchampou/cristina/commit/a5b47d1b97a8f20ea65a07eff52300f254a4f6d2))
+
 ## [0.0.4](https://github.com/cchampou/cristina/compare/v0.0.3...v0.0.4) (2024-12-08)
 
 
