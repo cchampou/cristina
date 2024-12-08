@@ -13,6 +13,4 @@ RUN yarn build
 
 RUN yarn --production
 
-RUN yarn cache clean
-
 CMD ["yarn", "start"]
