@@ -13,9 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Write the version to a file
-        run:
-        - echo VITE_VERSION=${{ github.ref_name }} >> frontend/.env
-        - cat frontend/.env
+        working-directory: frontend
+        run: echo VITE_VERSION=${{ github.ref_name }} >> .env
       - name: Build the frontend image
         working-directory: frontend
         run: docker build -t rg.fr-par.scw.cloud/cristina/frontend:latest .
