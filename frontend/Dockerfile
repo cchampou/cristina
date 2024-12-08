@@ -2,15 +2,12 @@ FROM node:lts-slim
 
 WORKDIR /app
 
-COPY package.json /app
-COPY yarn.lock /app
-
-RUN yarn install
-
 COPY . /app
 
-RUN yarn build
+RUN corepack enable
+RUN yarn set version berry
+RUN yarn install
 
-RUN yarn --production
+RUN yarn build
 
 CMD ["yarn", "start"]
