@@ -9,21 +9,21 @@ type Props = {
   immersive?: boolean
 }
 
+const isDesktop = () => window.innerWidth > 768;
+
 function Header({ immersive }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { t, i18n } = useTranslation();
 
   const handleResize = () => {
-    if (window.innerWidth > 768) {
+    if (isDesktop()) {
       setIsOpen(true);
-    } else {
-      setIsOpen(false);
     }
   }
 
   const handleClick = () => {
-    if (isOpen) setIsOpen(false);
+    if (isOpen && !isDesktop()) setIsOpen(false);
   }
 
   useEffect(() => {

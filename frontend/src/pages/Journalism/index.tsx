@@ -13,7 +13,6 @@ function Journalism() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    console.log('fetching references');
     startLoading();
     ApiService.fetchReferences().then((response) => {
       setReferences(response.data)

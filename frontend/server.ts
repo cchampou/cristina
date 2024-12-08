@@ -40,7 +40,7 @@ if (vite) {
 const relativeTemplatePath = isProduction ? 'dist/client/index.html' : 'index.html';
 const templatePath = path.resolve(__dirname, relativeTemplatePath);
 
-app.use('*', async (req, res, next) => {
+app.get('*', async (req, res) => {
   const pathName = req.path;
   const host = req.get('host') ?? defaultHost;
   const scheme = req.protocol;
@@ -54,8 +54,10 @@ app.use('*', async (req, res, next) => {
     const html = HTMLReplacement(template, appHtml, scheme, host, pathName, req.locale);
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
-    console.error(e);
-    next(e)
+    if (e instanceof Error) {
+      console.error(e);
+      res.status(500).end(e.message)
+    }
   }
 })
 
