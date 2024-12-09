@@ -1,10 +1,29 @@
+header {
+    flex-grow: 0;
+    flex-shrink: 1;
+    width: 100%;
+    margin-bottom: 16px;
+    min-height: 48px;
+}
+
+header[data-immersive="true"] {
+    position: absolute;
+}
+
 nav#header {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin-left: 50vw;
-    width: 50vw;
+    justify-content: flex-end;
     z-index: 1;
+}
+
+nav#header[data-immersive="true"] {
+    color: white;
+    text-shadow: 0 1px 2px black;
+}
+
+nav#header[data-immersive="false"] {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #burger {
@@ -12,7 +31,7 @@ nav#header {
     border: none;
     padding: 16px;
     width: 48px;
-    height: 64px;
+    height: 48px;
     align-self: flex-end;
     font-size: 1.2rem;
     cursor: pointer;
@@ -21,21 +40,29 @@ nav#header {
 }
 
 nav#header a {
-    padding: 1rem 0;
+    padding: 8px 16px;
     color: inherit;
     font-family: "Kanit", sans-serif;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 400;
     text-align: right;
+    background-color: white;
+}
+
+nav#header[data-immersive="true"] a {
+    background: none;
 }
 
 @media (max-width: 768px) {
+
     nav#header {
         width: 100%;
-        margin: 0;
         flex-direction: column;
-        position: absolute !important;
+        margin: 0;
+        top: 0;
+        z-index: 10000;
+        position: absolute;
     }
 
     nav#header button {
