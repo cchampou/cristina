@@ -33,8 +33,9 @@ type Props = PropsWithChildren<{
 
 function Loading({ loadingState, children, loadingMessage }: Props) {
   const { t } = useTranslation();
+
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="loading-content-container">
       {loadingState === LoadingState.loading &&
         <div className="loading-container">
           {loadingMessage && <p className="loading-text">{loadingMessage}</p>}

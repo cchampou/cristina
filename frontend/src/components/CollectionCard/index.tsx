@@ -4,6 +4,7 @@ import { Collection } from '../../services/api';
 import { getUploadURL } from '../../utils/uploads';
 
 import './index.css';
+import SubTitle from '../SubTitle';
 
 type CollectionCardProps = {
   collection: Collection;
@@ -48,9 +49,10 @@ function CollectionCard({ collection, onClick, onLoaded }: CollectionCardProps) 
         alt={collection.photos[0].description}
       />
     </div>
+    <div className="collection-backdrop"></div>
     <div className="collection-info">
-      <h2>{collection.title}</h2>
-      <h3>{collection.location} {date}</h3>
+      <span className="collection-text collection-title">{collection.title}</span>
+      <span className="collection-text collection-meta">{`${(collection.location ? collection.location + ' ' : '')}${date}`}</span>
     </div>
   </section>;
 }

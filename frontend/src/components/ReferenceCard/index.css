@@ -1,0 +1,28 @@
+.reference-card {
+    margin: 8px 0 16px 0;
+}
+
+.reference-card-title {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0 0 4px 0;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.reference-card-meta {
+    font-size: 0.8rem;
+}
+
+.reference-card-media {
+    background-color: darkslategrey;
+    color: white;
+    padding: 2px 4px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.reference-card-date {
+    margin: 0 8px;
+    font-style: italic;
+}

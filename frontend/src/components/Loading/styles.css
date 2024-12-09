@@ -1,8 +1,10 @@
+.loading-content-container {
+    position: relative;
+}
+
 .loading-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,5 +12,4 @@
 
 .loading-container, .error-message {
     text-align: center;
-    margin-bottom: 64px;
 }

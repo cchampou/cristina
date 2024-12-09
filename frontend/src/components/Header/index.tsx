@@ -17,10 +17,12 @@ function Header({ immersive }: Props) {
   const { t, i18n } = useTranslation();
 
   const handleResize = () => {
-    if (isDesktop()) {
+    if (isDesktop() && !isOpen) {
       setIsOpen(true);
     }
-    if (isOpen && !isDesktop()) setIsOpen(false);
+    if (isOpen && !isDesktop()) {
+      setIsOpen(false);
+    }
   }
 
   const handleClick = () => {
@@ -36,8 +38,6 @@ function Header({ immersive }: Props) {
     observer.observe(document.body);
   }, []);
 
-  const backgroundColor = immersive ? 'transparent' : 'white';
-
   const toggleLanguage: MouseEventHandler = (e) => {
     e.preventDefault();
     const nextLocale = supportedLocales.find(locale => locale !== i18n.language);
@@ -45,10 +45,7 @@ function Header({ immersive }: Props) {
   }
 
   return <header data-immersive={immersive}>
-    <nav id="header" data-immersive={immersive} style={{
-
-      backgroundColor: backgroundColor,
-    }} onClick={handleClick}>
+    <nav id="header" data-immersive={immersive} data-open={isOpen} onClick={handleClick}>
       <button id="burger" onClick={() => setIsOpen(prev => !prev)} style={{ color: immersive ? 'white' : 'black' }}>=
       </button>
       {isOpen && (<><NavLink to={routes.homepage.path}>{t('home')}</NavLink>

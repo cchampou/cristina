@@ -1,4 +1,6 @@
 import React from 'react';
+import './index.css';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   link?: string;
@@ -8,17 +10,19 @@ type Props = {
 }
 
 function ReferenceCard({ link, title, media, date }: Props) {
+  const { i18n } = useTranslation();
+
   return (
-    <>
-      <a href={link} target="_blank">
+    <article className="reference-card">
+      <a href={link} target="_blank" className="reference-card-title">
         {title}
       </a>
-      ,&nbsp;
-      <strong>{media}</strong>,&nbsp;
-      {date}
       <br/>
-      <br/>
-    </>
+      <span className="reference-card-meta">
+        <strong className="reference-card-media">{media}</strong>
+        <span className="reference-card-date">{new Date(date).toLocaleDateString(i18n.language)}</span>
+      </span>
+    </article>
   );
 }
 

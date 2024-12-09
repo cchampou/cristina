@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import type {Collection} from '../../services/api';
 
 import './index.css';
+import Title from '../Title';
 
 type PresentationProps = {
     collection: Collection;
@@ -18,7 +19,7 @@ function Presentation({collection}: PresentationProps) {
 
   return (
         <section id="anchor" className="presentation-section">
-            <h1>{collection?.title}</h1>
+            <Title>{collection?.title}</Title>
             <p id="presentation-summary">{collection?.summary}</p>
         </section>
     );

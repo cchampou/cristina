@@ -2,8 +2,12 @@ header {
     flex-grow: 0;
     flex-shrink: 1;
     width: 100%;
-    margin-bottom: 16px;
-    min-height: 48px;
+}
+
+@media (max-width: 768px) {
+    header {
+        min-height: 48px;
+    }
 }
 
 header[data-immersive="true"] {
@@ -20,10 +24,8 @@ nav#header {
 nav#header[data-immersive="true"] {
     color: white;
     text-shadow: 0 1px 2px black;
-}
-
-nav#header[data-immersive="false"] {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: none;
+    box-shadow: none;
 }
 
 #burger {
@@ -40,7 +42,7 @@ nav#header[data-immersive="false"] {
 }
 
 nav#header a {
-    padding: 8px 16px;
+    padding: 16px;
     color: inherit;
     font-family: "Kanit", sans-serif;
     text-decoration: none;
@@ -65,12 +67,16 @@ nav#header[data-immersive="true"] a {
         position: absolute;
     }
 
+    nav#header[data-open="true"][data-immersive="false"] {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    }
+
     nav#header button {
         display: inline-block;
         text-wrap: nowrap;
     }
 
     nav#header a, nav#header button {
-        padding-right: 16px;
+        padding: 8px 16px;
     }
 }

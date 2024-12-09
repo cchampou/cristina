@@ -4,6 +4,12 @@
     justify-content: center;
 }
 
+@media (max-width: 768px) {
+    #socials {
+        flex-direction: column;
+    }
+}
+
 #socials a {
     text-decoration: none;
     display: block;

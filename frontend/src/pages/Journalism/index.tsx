@@ -27,15 +27,13 @@ function Journalism() {
   return (
     <>
       <Title>{t('journalism')}</Title>
-      <SubTitle>{t('video and TV')}</SubTitle>
       <Loading loadingState={loadingState}>
-      {references.filter(({ type }) => type === ReferenceType.video)
-        .map((props) => <ReferenceCard {...props} key={props.documentId}/>)}
-      </Loading>
-      <SubTitle>{t('print')}</SubTitle>
-      <Loading loadingState={loadingState}>
-      {references.filter(({ type }) => type === ReferenceType.print)
-        .map(({ ...props }) => <ReferenceCard {...props} key={props.documentId}/>)}
+        <SubTitle>{t('video and TV')}</SubTitle>
+        {references.filter(({ type }) => type === ReferenceType.video)
+          .map((props) => <ReferenceCard {...props} key={props.documentId}/>)}
+        <SubTitle>{t('print')}</SubTitle>
+        {references.filter(({ type }) => type === ReferenceType.print)
+          .map(({ ...props }) => <ReferenceCard {...props} key={props.documentId}/>)}
       </Loading>
     </>
   );
