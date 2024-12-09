@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.11](https://github.com/cchampou/cristina/compare/v0.0.10...v0.0.11) (2024-12-09)
+
+
+### Features
+
+* **UI:** redesign ([8543333](https://github.com/cchampou/cristina/commit/85433336820f4bc92dee396453244aaec9a322f4))
+
 ## 0.0.10 (2024-12-08)
 
 
