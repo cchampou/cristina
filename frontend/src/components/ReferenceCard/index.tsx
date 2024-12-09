@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 import { useTranslation } from 'react-i18next';
+import { formatDateWithLocale } from '../../utils/date';
 
 type Props = {
   link?: string;
@@ -20,7 +21,7 @@ function ReferenceCard({ link, title, media, date }: Props) {
       <br/>
       <span className="reference-card-meta">
         <strong className="reference-card-media">{media}</strong>
-        <span className="reference-card-date">{new Date(date).toLocaleDateString(i18n.language)}</span>
+        <span className="reference-card-date">{formatDateWithLocale(date)}</span>
       </span>
     </article>
   );
